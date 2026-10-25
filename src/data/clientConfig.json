@@ -1,0 +1,19 @@
+{
+    "businessName": "Sample Local Co.",
+    "niche": "Service & Hospitality",
+    "tagline": "Modern Craftsmanship & Trusted Local Service",
+    "neighborhood": "Hudson County, NJ",
+    "primaryHex": "#f59e0b",
+    "phone": "(201) 555-0199",
+    "address": "123 Washington St, Hoboken, NJ",
+    "heroCtaText": "Book an Appointment",
+    "services": [
+      { "name": "Signature Service", "description": "Tailored to your exact needs with premium attention to detail.", "price": "From $45" },
+      { "name": "Express Consultation", "description": "Fast, transparent quotes and same-day availability.", "price": "Free" },
+      { "name": "Full Package", "description": "Comprehensive service backed by our local satisfaction guarantee.", "price": "$120" }
+    ],
+    "reviews": [
+      { "author": "Michael R.", "text": "Best spot in town. Fast, reliable, and super friendly staff." },
+      { "author": "Sarah K.", "text": "Been coming here for years—highly recommend to anyone in the neighborhood." }
+    ]
+  }

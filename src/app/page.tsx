@@ -1,69 +1,66 @@
-import Image from "next/image";
+import config from "@/data/clientConfig.json";
 
-export default function Home() {
+export default function ClientPreviewPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+    <main className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-amber-500 selection:text-zinc-950">
+      {/* Top Demo Banner */}
+      <div className="bg-amber-500/10 border-b border-amber-500/30 px-4 py-2 text-center text-xs text-amber-300">
+        Live Concept Preview custom-built for <strong>{config.businessName}</strong> • Fully Mobile Optimized
+      </div>
+
+      {/* Hero Section */}
+      <section className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <span className="inline-block px-3 py-1 rounded-full text-xs uppercase tracking-widest bg-zinc-900 border border-zinc-800 text-amber-400 mb-4">
+          {config.niche} • {config.neighborhood}
+        </span>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
+          {config.businessName}
+        </h1>
+        <p className="text-xl text-zinc-400 max-w-2xl mb-10">{config.tagline}</p>
+        <div className="flex flex-wrap gap-4">
+          <a href={`tel:${config.phone}`} className="px-6 py-3.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold transition">
+            {config.heroCtaText} ({config.phone})
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+          <a href="#services" className="px-6 py-3.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 font-medium transition">
+            Explore Offerings
           </a>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Services / Menu Grid */}
+      <section id="services" className="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-900">
+        <h2 className="text-2xl font-semibold text-white mb-8">Featured Offerings</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {config.services?.map((item, i) => (
+            <div key={i} className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 flex flex-col justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">{item.name}</h3>
+                <p className="text-sm text-zinc-400 mb-4">{item.description}</p>
+              </div>
+              {item.price && <span className="text-amber-400 font-mono text-sm font-semibold">{item.price}</span>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Social Proof */}
+      <section className="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-900">
+        <h2 className="text-2xl font-semibold text-white mb-8">What Neighbors Are Saying</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {config.reviews?.map((r, i) => (
+            <blockquote key={i} className="bg-zinc-900/40 border border-zinc-800/80 rounded-xl p-6">
+              <p className="text-zinc-300 italic mb-4">&ldquo;{r.text}&rdquo;</p>
+              <footer className="text-xs text-amber-400 font-medium">— {r.author} (Verified Local Review)</footer>
+            </blockquote>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="max-w-5xl mx-auto px-6 py-12 border-t border-zinc-900 text-sm text-zinc-500 flex flex-col md:flex-row justify-between gap-4">
+        <div>{config.businessName} • {config.address}</div>
+        <div>Call: {config.phone}</div>
+      </footer>
+    </main>
   );
 }
