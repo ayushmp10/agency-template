@@ -1,19 +1,111 @@
 {
-    "businessName": "Sample Local Co.",
-    "niche": "Service & Hospitality",
-    "tagline": "Modern Craftsmanship & Trusted Local Service",
-    "neighborhood": "Hudson County, NJ",
-    "primaryHex": "#f59e0b",
-    "phone": "(201) 555-0199",
-    "address": "123 Washington St, Hoboken, NJ",
-    "heroCtaText": "Book an Appointment",
-    "services": [
-      { "name": "Signature Service", "description": "Tailored to your exact needs with premium attention to detail.", "price": "From $45" },
-      { "name": "Express Consultation", "description": "Fast, transparent quotes and same-day availability.", "price": "Free" },
-      { "name": "Full Package", "description": "Comprehensive service backed by our local satisfaction guarantee.", "price": "$120" }
-    ],
-    "reviews": [
-      { "author": "Michael R.", "text": "Best spot in town. Fast, reliable, and super friendly staff." },
-      { "author": "Sarah K.", "text": "Been coming here for years—highly recommend to anyone in the neighborhood." }
+  "businessName": "Lucia & Sons Artisanal Bakery",
+  "niche": "Artisanal Bakery & Espresso",
+  "archetype": "warm-artisanal",
+  "tagline": "Slow-Fermented Sourdough, Wood-Fired Pastries & Fresh Espresso Daily",
+  "neighborhood": "Hoboken, NJ",
+  "phone": "(201) 555-0142",
+  "address": "418 Washington St, Hoboken, NJ 07030",
+  "rating": 4.9,
+  "reviewCount": 142,
+  "heroCtaText": "Order Fresh Daily Bakes",
+  "secondaryCtaText": "View Morning Menu",
+  "theme": {
+    "mode": "light",
+    "primaryColor": "#b45309",
+    "accentColor": "#fef3c7",
+    "bgColor": "#fdfbf7",
+    "surfaceColor": "#ffffff",
+    "textColor": "#1c1917",
+    "fontPairing": "serif"
+  },
+  "beforeAfter": {
+    "hasOldSite": true,
+    "oldScreenshotUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
+    "auditNotes": [
+      "Previous website lacked mobile menu ordering",
+      "No direct tap-to-call or daily fresh bake schedule",
+      "Over 4s mobile page load on cellular networks"
+    ]
+  },
+  "highlights": [
+    { "label": "Batch Baked", "value": "Fresh Every Morning at 5am" },
+    { "label": "Google Rating", "value": "4.9 ★ (140+ Reviews)" },
+    { "label": "Local Legacy", "value": "Hudson County Favorite" }
+  ],
+  "photos": [
+    {
+      "url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80",
+      "caption": "Signature Country Sourdough Loaf"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80",
+      "caption": "Hand-Laminated Butter Croissants"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&auto=format&fit=crop&q=80",
+      "caption": "Morning Espresso & Counter Spread"
+    }
+  ],
+  "services": [
+    {
+      "name": "Country Sourdough Boule",
+      "description": "36-hour slow cold fermentation with organic stone-ground whole wheat flours.",
+      "price": "$9.50",
+      "badge": "House Signature"
+    },
+    {
+      "name": "Almond Frangipane Croissant",
+      "description": "Twice-baked butter croissant filled with vanilla almond cream and toasted sliced almonds.",
+      "price": "$5.75",
+      "badge": "Best Seller"
+    },
+    {
+      "name": "Single-Origin Cortado",
+      "description": "Equal parts rich espresso and textured steamed whole milk from local dairy farms.",
+      "price": "$4.50"
+    },
+    {
+      "name": "Weekend Focaccia Barese",
+      "description": "Olive oil crust topped with roasted cherry tomatoes, Castelvetrano olives, and wild rosemary.",
+      "price": "$8.00",
+      "badge": "Weekends Only"
+    }
+  ],
+  "reviews": [
+    {
+      "author": "Elena M.",
+      "text": "Hands down the best sourdough in New Jersey. The crust is blistered to perfection and the crumb is heavenly. Get here early on weekends!",
+      "rating": 5,
+      "relativeTime": "2 weeks ago",
+      "verifiedGoogle": true
+    },
+    {
+      "author": "Marco D.",
+      "text": "Authentic neighborhood staple. Their croissants rival anything in Manhattan and the staff remembers your name.",
+      "rating": 5,
+      "relativeTime": "a month ago",
+      "verifiedGoogle": true
+    },
+    {
+      "author": "Sarah K.",
+      "text": "The almond croissant and cortado make my Saturday morning every week. Such a gem for Hoboken.",
+      "rating": 5,
+      "relativeTime": "3 months ago",
+      "verifiedGoogle": true
+    }
+  ],
+  "hours": {
+    "openNow": true,
+    "currentStatus": "Open Now • Closes at 5:00 PM",
+    "schedule": [
+      "Monday: 7:00 AM – 5:00 PM",
+      "Tuesday: 7:00 AM – 5:00 PM",
+      "Wednesday: 7:00 AM – 5:00 PM",
+      "Thursday: 7:00 AM – 5:00 PM",
+      "Friday: 7:00 AM – 6:00 PM",
+      "Saturday: 7:30 AM – 6:00 PM",
+      "Sunday: 8:00 AM – 3:00 PM"
     ]
   }
+}

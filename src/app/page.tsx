@@ -1,66 +1,118 @@
-import config from "@/data/clientConfig.json";
+import rawConfig from "@/data/clientConfig.json";
+import { ClientConfig } from "@/types/clientConfig";
+import { HeaderBanner } from "@/components/Shared/HeaderBanner";
+import { PhotoGallery } from "@/components/Shared/PhotoGallery";
+import { ReviewsSection } from "@/components/Shared/ReviewsSection";
+import { HoursLocationSection } from "@/components/Shared/HoursLocationSection";
+import { StickyMobileBar } from "@/components/Shared/StickyMobileBar";
+import { ArtisanalLayout } from "@/components/Archetypes/ArtisanalLayout";
+import { TradesLayout } from "@/components/Archetypes/TradesLayout";
+import { ModernLayout } from "@/components/Archetypes/ModernLayout";
+
+const config: ClientConfig = {
+  businessName: rawConfig.businessName || "Local Business",
+  niche: rawConfig.niche || "Professional Services",
+  archetype: (rawConfig.archetype as any) || "clean-modern",
+  tagline: rawConfig.tagline || "Trusted Local Craftsmanship & Dedicated Service",
+  neighborhood: rawConfig.neighborhood || "Hudson County, NJ",
+  phone: rawConfig.phone || "(201) 555-0100",
+  address: rawConfig.address || "Local Downtown District",
+  rating: rawConfig.rating ?? 4.9,
+  reviewCount: rawConfig.reviewCount ?? 45,
+  heroCtaText: rawConfig.heroCtaText || "Get in Touch",
+  secondaryCtaText: (rawConfig as any).secondaryCtaText || "Explore Offerings",
+  theme: {
+    mode: (rawConfig.theme?.mode === "light" ? "light" : "dark") as "light" | "dark",
+    primaryColor: rawConfig.theme?.primaryColor || (rawConfig as any).primaryHex || "#f59e0b",
+    accentColor: rawConfig.theme?.accentColor || "#fbbf24",
+    bgColor: rawConfig.theme?.bgColor || "#09090b",
+    surfaceColor: rawConfig.theme?.surfaceColor || "#18181b",
+    textColor: rawConfig.theme?.textColor || "#f4f4f5",
+    fontPairing: (rawConfig.theme?.fontPairing === "serif" ? "serif" : "sans") as "serif" | "sans",
+  },
+  beforeAfter: rawConfig.beforeAfter || {
+    hasOldSite: false,
+    oldScreenshotUrl: "NONE",
+  },
+  highlights: rawConfig.highlights || [],
+  photos: rawConfig.photos || [],
+  services: rawConfig.services || [],
+  reviews: (rawConfig.reviews as any) || [],
+  hours: rawConfig.hours,
+};
 
 export default function ClientPreviewPage() {
+  const { theme, archetype } = config;
+  const isDark = theme.mode === "dark";
+
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-amber-500 selection:text-zinc-950">
-      {/* Top Demo Banner */}
-      <div className="bg-amber-500/10 border-b border-amber-500/30 px-4 py-2 text-center text-xs text-amber-300">
-        Live Concept Preview custom-built for <strong>{config.businessName}</strong> • Fully Mobile Optimized
-      </div>
+    <div
+      style={{
+        backgroundColor: theme.bgColor,
+        color: theme.textColor,
+      }}
+      className={`min-h-screen flex flex-col transition-colors duration-300 pb-20 md:pb-0 ${
+        isDark ? "dark" : "light"
+      }`}
+    >
+      {/* Top Demo & Before/After Comparison Bar */}
+      <HeaderBanner config={config} />
 
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <span className="inline-block px-3 py-1 rounded-full text-xs uppercase tracking-widest bg-zinc-900 border border-zinc-800 text-amber-400 mb-4">
-          {config.niche} • {config.neighborhood}
-        </span>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-          {config.businessName}
-        </h1>
-        <p className="text-xl text-zinc-400 max-w-2xl mb-10">{config.tagline}</p>
-        <div className="flex flex-wrap gap-4">
-          <a href={`tel:${config.phone}`} className="px-6 py-3.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold transition">
-            {config.heroCtaText} ({config.phone})
-          </a>
-          <a href="#services" className="px-6 py-3.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 font-medium transition">
-            Explore Offerings
-          </a>
+      {/* Main Archetype Layout */}
+      <main className="flex-1">
+        {archetype === "warm-artisanal" ? (
+          <ArtisanalLayout config={config} />
+        ) : archetype === "bold-trades" ? (
+          <TradesLayout config={config} />
+        ) : (
+          <ModernLayout config={config} />
+        )}
+
+        {/* Real Storefront & Work Photo Gallery from Google Places */}
+        {config.photos && config.photos.length > 0 && (
+          <PhotoGallery
+            photos={config.photos}
+            businessName={config.businessName}
+            theme={theme}
+          />
+        )}
+
+        {/* Real Customer Reputation & Verified Reviews */}
+        <ReviewsSection
+          reviews={config.reviews}
+          rating={config.rating}
+          reviewCount={config.reviewCount}
+          businessName={config.businessName}
+          theme={theme}
+        />
+
+        {/* Live Operating Hours & Neighborhood Map */}
+        <HoursLocationSection
+          hours={config.hours}
+          address={config.address}
+          phone={config.phone}
+          businessName={config.businessName}
+          theme={theme}
+        />
+      </main>
+
+      {/* Subtle Agency Footer */}
+      <footer className="border-t border-black/5 dark:border-white/10 py-12 px-6 max-w-6xl mx-auto w-full text-xs opacity-60 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div>
+          © {new Date().getFullYear()} {config.businessName}. All rights reserved.
         </div>
-      </section>
-
-      {/* Services / Menu Grid */}
-      <section id="services" className="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-900">
-        <h2 className="text-2xl font-semibold text-white mb-8">Featured Offerings</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {config.services?.map((item, i) => (
-            <div key={i} className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">{item.name}</h3>
-                <p className="text-sm text-zinc-400 mb-4">{item.description}</p>
-              </div>
-              {item.price && <span className="text-amber-400 font-mono text-sm font-semibold">{item.price}</span>}
-            </div>
-          ))}
+        <div className="flex items-center gap-2">
+          <span>Digital uplift staged by</span>
+          <span className="font-semibold text-amber-500">Argon Engine</span>
         </div>
-      </section>
-
-      {/* Social Proof */}
-      <section className="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-900">
-        <h2 className="text-2xl font-semibold text-white mb-8">What Neighbors Are Saying</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {config.reviews?.map((r, i) => (
-            <blockquote key={i} className="bg-zinc-900/40 border border-zinc-800/80 rounded-xl p-6">
-              <p className="text-zinc-300 italic mb-4">&ldquo;{r.text}&rdquo;</p>
-              <footer className="text-xs text-amber-400 font-medium">— {r.author} (Verified Local Review)</footer>
-            </blockquote>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="max-w-5xl mx-auto px-6 py-12 border-t border-zinc-900 text-sm text-zinc-500 flex flex-col md:flex-row justify-between gap-4">
-        <div>{config.businessName} • {config.address}</div>
-        <div>Call: {config.phone}</div>
       </footer>
-    </main>
+
+      {/* Sticky Mobile Direct Call / Action Bar */}
+      <StickyMobileBar
+        phone={config.phone}
+        ctaText={config.heroCtaText}
+        theme={theme}
+      />
+    </div>
   );
 }
