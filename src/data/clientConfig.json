@@ -1,111 +1,125 @@
 {
-  "businessName": "Lucia & Sons Artisanal Bakery",
-  "niche": "Artisanal Bakery & Espresso",
+  "businessName": "Malpa Cafe",
+  "niche": "Artisanal Specialty Coffee & Neighborhood Cafe",
   "archetype": "warm-artisanal",
-  "tagline": "Slow-Fermented Sourdough, Wood-Fired Pastries & Fresh Espresso Daily",
-  "neighborhood": "Hoboken, NJ",
-  "phone": "(201) 555-0142",
-  "address": "418 Washington St, Hoboken, NJ 07030",
+  "tagline": "Specialty coffee, handcrafted seasonal sips, and housemade pastries in West New York.",
+  "neighborhood": "NJ 07093",
+  "phone": "(201) 775-2500",
+  "address": "158 61st St, West New York, NJ 07093, USA",
   "rating": 4.9,
-  "reviewCount": 142,
-  "heroCtaText": "Order Fresh Daily Bakes",
-  "secondaryCtaText": "View Morning Menu",
+  "reviewCount": 93,
+  "priceLevel": "PRICE_LEVEL_INEXPENSIVE",
+  "heroCtaText": "View Seasonal Menu",
+  "secondaryCtaText": "Find Us on 61st St",
   "theme": {
     "mode": "light",
-    "primaryColor": "#b45309",
-    "accentColor": "#fef3c7",
+    "primaryColor": "#d97706",
+    "accentColor": "#b45309",
     "bgColor": "#fdfbf7",
     "surfaceColor": "#ffffff",
-    "textColor": "#1c1917",
+    "textColor": "#292524",
     "fontPairing": "serif"
   },
   "beforeAfter": {
     "hasOldSite": true,
-    "oldScreenshotUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
+    "oldWebsiteUrl": "http://www.malpacafe.com/",
+    "oldScreenshotUrl": "https://iad.microlink.io/BwTLfXRrtjy4iSZYKkBvyoL5OJfNoevZrbCi-D0qJZ6KA17HNEYLQswBXdPoNQpKmg7jqqHgGyKnCMOXS-PtSA.png",
     "auditNotes": [
-      "Previous website lacked mobile menu ordering",
-      "No direct tap-to-call or daily fresh bake schedule",
-      "Over 4s mobile page load on cellular networks"
+      "The current landing page relies on an ultra-minimalist single yellow box layout that forces guests to tap through separate external links rather than immediately previewing popular signature drinks or baked goods.",
+      "Mobile visitors lack an instant tap-to-directions button or an interactive seasonal menu showcase, leading to lost takeout and morning commuter traffic."
     ]
   },
   "highlights": [
-    { "label": "Batch Baked", "value": "Fresh Every Morning at 5am" },
-    { "label": "Google Rating", "value": "4.9 ★ (140+ Reviews)" },
-    { "label": "Local Legacy", "value": "Hudson County Favorite" }
+    {
+      "label": "Google Rating",
+      "value": "4.9 \u2605 (93+ Reviews)"
+    },
+    {
+      "label": "Neighborhood Hub",
+      "value": "Family-Owned on 61st St"
+    },
+    {
+      "label": "Craft Brews",
+      "value": "House Specialty Syrups"
+    }
   ],
   "photos": [
     {
-      "url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80",
-      "caption": "Signature Country Sourdough Loaf"
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLe5ph5yses033h0_U9vTNNdiQPPvKuYz2iGgrwLcNAwXOzcKxxrpsvlXQdEj45ztEpNKXhysXYcdDv2mSDb9iLCCSFOyAK43NRfUhMZO69e8j9uQnUtPcJKzbf-J7ajgt_1ZMt73AU74wJF=s4800-w1000-h800",
+      "caption": "Malpa Cafe"
     },
     {
-      "url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80",
-      "caption": "Hand-Laminated Butter Croissants"
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLeAR91elqRPrcHwkDDULG9ZlRvoFyU1F2FXjH7BvVJWo6GL-GDaI0M8IobmA7WBkvStNocU-DZNNJ2ltfShdmMe6XTvRGHfxI-eagmJKo6JXo3u5qmzx-JDeUBidesl5h2nlW0BGQAjf6I=s4800-w1000-h800",
+      "caption": "Malpa Cafe"
     },
     {
-      "url": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&auto=format&fit=crop&q=80",
-      "caption": "Morning Espresso & Counter Spread"
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfaqFeusgOmgBR3vX61lMH4Uw7UwzcjUi4Qh3fWVH5mieNdOafD_Q7nTmv3rlwPUx6eWV6aK6Cw0tp47jSSNjottiB65_0GsVsQou2g7AwGJY7KjINTSOTf0lR7653oIjgDet0hxtvhesP4=s4800-w1000-h800",
+      "caption": "Malpa Cafe"
+    },
+    {
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLdbxC4cYi0FfWNcUpz1syC9IlDSM9uZR_Z3vgpdGOP56_ZVraKCP4bzL2LjOPNsofHbEhIbe0an078eFbxUGIesYu9KodUCvQHlz2V5qrFDSY_n3sMGe983KyMcpb4RdPSYJyiJWnAMNFHY=s4800-w1000-h800",
+      "caption": "Malpa Cafe"
     }
   ],
   "services": [
     {
-      "name": "Country Sourdough Boule",
-      "description": "36-hour slow cold fermentation with organic stone-ground whole wheat flours.",
-      "price": "$9.50",
-      "badge": "House Signature"
-    },
-    {
-      "name": "Almond Frangipane Croissant",
-      "description": "Twice-baked butter croissant filled with vanilla almond cream and toasted sliced almonds.",
+      "name": "Rosemary Maple Latte",
+      "description": "Espresso infused with housemade rosemary maple reduction and textured oat or whole milk.",
       "price": "$5.75",
-      "badge": "Best Seller"
+      "badge": "Signature"
     },
     {
-      "name": "Single-Origin Cortado",
-      "description": "Equal parts rich espresso and textured steamed whole milk from local dairy farms.",
-      "price": "$4.50"
+      "name": "Artisanal Banana Bread",
+      "description": "Thick-sliced, caramelized crust banana loaf baked fresh daily with organic spices.",
+      "price": "$4.50",
+      "badge": "Customer Favorite"
     },
     {
-      "name": "Weekend Focaccia Barese",
-      "description": "Olive oil crust topped with roasted cherry tomatoes, Castelvetrano olives, and wild rosemary.",
-      "price": "$8.00",
-      "badge": "Weekends Only"
+      "name": "Ceremonial Matcha Latte",
+      "description": "First-harvest stone-ground Japanese matcha whisked to order with your choice of steamed milk.",
+      "price": "$5.50"
+    },
+    {
+      "name": "Gourmet Toasted Grilled Cheese",
+      "description": "Melted aged cheeses and savory spreads pressed golden on artisanal bakery sourdough.",
+      "price": "$9.25",
+      "badge": "Lunch Special"
     }
   ],
   "reviews": [
     {
-      "author": "Elena M.",
-      "text": "Hands down the best sourdough in New Jersey. The crust is blistered to perfection and the crumb is heavenly. Get here early on weekends!",
+      "author": "Harper Meehan",
+      "text": "Stumbled upon this cafe while we were visiting for a few days. We tried the Rosemary Maple latte, cinnamon maple latte, grilled cheese, chia seed pudding and banana bread. This was the BEST banana bread I have ever had.\n\nThis cafe is locally and family owned. ",
       "rating": 5,
       "relativeTime": "2 weeks ago",
       "verifiedGoogle": true
     },
     {
-      "author": "Marco D.",
-      "text": "Authentic neighborhood staple. Their croissants rival anything in Manhattan and the staff remembers your name.",
+      "author": "Gabe Raybould",
+      "text": "Malpa Cafe is the best!! The atmosphere is warm and inviting, making it the perfect place to slow down, enjoy a coffee, and have something delicious to eat. You can the owners put a heavy emphasis on quality ingredients when it comes to the coffee and the food",
       "rating": 5,
       "relativeTime": "a month ago",
       "verifiedGoogle": true
     },
     {
-      "author": "Sarah K.",
-      "text": "The almond croissant and cortado make my Saturday morning every week. Such a gem for Hoboken.",
+      "author": "Braden",
+      "text": "I'm so lucky to have Malpa Cafe in my neighborhood! it's a stylish space and the owners are so friendly, I've only ever had good experiences every time I've gone. I like to get a matcha since I'm not much of a coffee person. the pastries and the sandwiches are",
       "rating": 5,
-      "relativeTime": "3 months ago",
+      "relativeTime": "7 months ago",
       "verifiedGoogle": true
     }
   ],
   "hours": {
-    "openNow": true,
-    "currentStatus": "Open Now • Closes at 5:00 PM",
+    "openNow": false,
+    "currentStatus": "Closed",
     "schedule": [
-      "Monday: 7:00 AM – 5:00 PM",
-      "Tuesday: 7:00 AM – 5:00 PM",
-      "Wednesday: 7:00 AM – 5:00 PM",
-      "Thursday: 7:00 AM – 5:00 PM",
-      "Friday: 7:00 AM – 6:00 PM",
-      "Saturday: 7:30 AM – 6:00 PM",
-      "Sunday: 8:00 AM – 3:00 PM"
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: 7:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+      "Thursday: 7:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+      "Friday: 7:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+      "Saturday: 8:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+      "Sunday: Closed"
     ]
   }
 }
