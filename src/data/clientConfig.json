@@ -1,111 +1,132 @@
 {
-  "businessName": "Lucia & Sons Artisanal Bakery",
-  "niche": "Artisanal Bakery & Espresso",
+  "businessName": "D\u00e4n Bakery",
+  "niche": "Bakery",
   "archetype": "warm-artisanal",
-  "tagline": "Slow-Fermented Sourdough, Wood-Fired Pastries & Fresh Espresso Daily",
-  "neighborhood": "Hoboken, NJ",
-  "phone": "(201) 555-0142",
-  "address": "418 Washington St, Hoboken, NJ 07030",
+  "tagline": "Freshly Baked European Pastries & Signature Honey Cakes in Hoboken",
+  "neighborhood": "NJ 07030",
+  "phone": "(551) 299-7999",
+  "address": "500 Washington St, Hoboken, NJ 07030, USA",
   "rating": 4.9,
-  "reviewCount": 142,
-  "heroCtaText": "Order Fresh Daily Bakes",
-  "secondaryCtaText": "View Morning Menu",
+  "reviewCount": 49,
+  "priceLevel": "PRICE_LEVEL_INEXPENSIVE",
+  "heroCtaText": "Order Fresh Bakes Ahead",
+  "secondaryCtaText": "Explore Today's Menu",
   "theme": {
     "mode": "light",
-    "primaryColor": "#b45309",
-    "accentColor": "#fef3c7",
+    "primaryColor": "#d96b3a",
+    "accentColor": "#c55325",
     "bgColor": "#fdfbf7",
     "surfaceColor": "#ffffff",
-    "textColor": "#1c1917",
+    "textColor": "#2c221e",
     "fontPairing": "serif"
+  },
+  "storyBlock": {
+    "badge": "Hoboken Daily Craft",
+    "narrative": "Every morning, our bakery comes alive with the irresistible aroma of freshly baked croissants, honey cakes, and savory pastries crafted with European tradition. We pour love into every detail to provide Hoboken with a warm, welcoming community hub.",
+    "headline": "Authentic European Baking in the Heart of Hoboken",
+    "statNumber": "4.9 \u2605",
+    "statLabel": "Customer Rating"
   },
   "beforeAfter": {
     "hasOldSite": true,
-    "oldScreenshotUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80",
+    "oldWebsiteUrl": "https://danbakery.us/pages/location-hoboken",
+    "oldScreenshotUrl": "https://iad.microlink.io/ERD_E2PidfypG4Fem-bymuenLEosrZYLtCQ9tq-_xKm3Y4UoJhfK5nQfJ0EaWggXUbsdUTpKQf2yTuSIIC1S9g.png",
     "auditNotes": [
-      "Previous website lacked mobile menu ordering",
-      "No direct tap-to-call or daily fresh bake schedule",
-      "Over 4s mobile page load on cellular networks"
+      "Order pickup and menu CTAs are visually crowded against lifestyle photography on mobile viewports.",
+      "The 'Closed Now' badge lacks immediate operating hours context for high-intent visitors looking to order ahead."
     ]
   },
   "highlights": [
-    { "label": "Batch Baked", "value": "Fresh Every Morning at 5am" },
-    { "label": "Google Rating", "value": "4.9 ★ (140+ Reviews)" },
-    { "label": "Local Legacy", "value": "Hudson County Favorite" }
+    {
+      "label": "Top Rated",
+      "value": "4.9 \u2605 (49+ Google Reviews)"
+    },
+    {
+      "label": "Hoboken Hub",
+      "value": "Washington St, NJ 07030"
+    },
+    {
+      "label": "Daily Baking",
+      "value": "100% Scratch European Tradition"
+    }
   ],
   "photos": [
     {
-      "url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80",
-      "caption": "Signature Country Sourdough Loaf"
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLez6NqPClJ240cnT1b2dZmss3Wl7gl8In_cU2mOCLQLSbqFy8_qzJhAbASIjycfbkPvlVQdZLc68D0hOAlZSq_l2O2lQB16EAF9lSef7EenPa62uXt00NyJAf3m2f86PdIyQCg_756vYfQ=s4800-w1000-h800",
+      "caption": "D\u00e4n Bakery"
     },
     {
-      "url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80",
-      "caption": "Hand-Laminated Butter Croissants"
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLcr6nJrKvlCcWmNESAW2vbQ1pocZVzUz6tIMgDM7-kAJjZ1sX03vtR_bJU4_uahAJxTBaUC0KiGBot-DSgPIfu1vApVIdU2j6IEC78pAnaptXdRRChKGhhJ4geVzoCHr8aI7vetNQq-ZNdv=s4800-w1000-h800",
+      "caption": "Rex Accavallo"
     },
     {
-      "url": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&auto=format&fit=crop&q=80",
-      "caption": "Morning Espresso & Counter Spread"
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLfY8MbmzNr_FcIsE0lGbnpI5AJ-tsODzjFnPq-hF15QRnPxXeyM9L1Nzp1vocXr01SW92ByUKl8FT-_ePSpdFYxQgVnjfQREmlI9Ev4GIzq3ipTLWKBqTNUYF3o4mkYhJUF7t-81mcXaJ7a=s4800-w1000-h800",
+      "caption": "Gani Stambek"
+    },
+    {
+      "url": "https://lh3.googleusercontent.com/grass-cs/AABkmLeN6NY9Gbepl5KhB-6RuokvFi-TVqtYwz-qOa7wPXKzojvuTcPd7uNnquqH20Cdvs-GXBpz16qH8XIqlUMtFy1w4Hi_WWILqZ3OmHh-f3-c_XDxHg5oerGxZV_yAy7LSH3DkKkDl4NmVv4l=s4800-w1000-h800",
+      "caption": "Rohit Sood"
     }
   ],
   "services": [
     {
-      "name": "Country Sourdough Boule",
-      "description": "36-hour slow cold fermentation with organic stone-ground whole wheat flours.",
-      "price": "$9.50",
-      "badge": "House Signature"
+      "name": "San Sebastian Cheesecake",
+      "description": "Crustless Basque-style burnt cheesecake featuring a caramelized outer skin and rich, velvety custard center.",
+      "price": "$42",
+      "badge": "House Special"
     },
     {
-      "name": "Almond Frangipane Croissant",
-      "description": "Twice-baked butter croissant filled with vanilla almond cream and toasted sliced almonds.",
-      "price": "$5.75",
-      "badge": "Best Seller"
+      "name": "Signature Medovik Honey Cake",
+      "description": "Delicate layers of honey-infused sponge cake woven with light tangy cream, handcrafted daily.",
+      "price": "$38",
+      "badge": "Bestseller"
     },
     {
-      "name": "Single-Origin Cortado",
-      "description": "Equal parts rich espresso and textured steamed whole milk from local dairy farms.",
-      "price": "$4.50"
+      "name": "Artisanal Morning Pastry Box",
+      "description": "Curated selection of flaky butter croissants, pain au chocolat, and seasonal European fruit tarts.",
+      "price": "$24",
+      "badge": "Baked Daily"
     },
     {
-      "name": "Weekend Focaccia Barese",
-      "description": "Olive oil crust topped with roasted cherry tomatoes, Castelvetrano olives, and wild rosemary.",
-      "price": "$8.00",
-      "badge": "Weekends Only"
+      "name": "Espresso & Savory Pastry Combo",
+      "description": "Rich double-shot specialty espresso beverage paired with a freshly baked spinach-feta or ham puff pastry.",
+      "price": "$13"
     }
   ],
   "reviews": [
     {
-      "author": "Elena M.",
-      "text": "Hands down the best sourdough in New Jersey. The crust is blistered to perfection and the crumb is heavenly. Get here early on weekends!",
+      "author": "Angelika Klepacka",
+      "text": "Absolutely love this coffee shop! Everything is delicious, especially the European-style! \ud83c\udf70\u2615 The desserts are fresh, flavorful, and truly remind me of authentic European bakeries. The atmosphere is warm and welcoming, making it a perfect place to relax and enj",
       "rating": 5,
-      "relativeTime": "2 weeks ago",
+      "relativeTime": "3 weeks ago",
       "verifiedGoogle": true
     },
     {
-      "author": "Marco D.",
-      "text": "Authentic neighborhood staple. Their croissants rival anything in Manhattan and the staff remembers your name.",
+      "author": "Carlos A. Hernandez",
+      "text": "The desserts were amazing - the san Sebastian cheesecake was incredible. The caf\u00e9 also has great seating. I highly recommend!!",
       "rating": 5,
       "relativeTime": "a month ago",
       "verifiedGoogle": true
     },
     {
-      "author": "Sarah K.",
-      "text": "The almond croissant and cortado make my Saturday morning every week. Such a gem for Hoboken.",
+      "author": "Joseph Alminawi",
+      "text": "Exciting spot for some pastry action! Really enjoyed the cheese and parsley pastry.\n\nLooking forward to trying out the others. Staff were super nice and it just kinda felt like they put a lot of love into the place. Very polished.\n\nThis is where the gelato lab",
       "rating": 5,
-      "relativeTime": "3 months ago",
+      "relativeTime": "a month ago",
       "verifiedGoogle": true
     }
   ],
   "hours": {
-    "openNow": true,
-    "currentStatus": "Open Now • Closes at 5:00 PM",
+    "openNow": false,
+    "currentStatus": "Closed",
     "schedule": [
-      "Monday: 7:00 AM – 5:00 PM",
-      "Tuesday: 7:00 AM – 5:00 PM",
-      "Wednesday: 7:00 AM – 5:00 PM",
-      "Thursday: 7:00 AM – 5:00 PM",
-      "Friday: 7:00 AM – 6:00 PM",
-      "Saturday: 7:30 AM – 6:00 PM",
-      "Sunday: 8:00 AM – 3:00 PM"
+      "Monday: 7:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+      "Tuesday: 7:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+      "Wednesday: 7:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+      "Thursday: 7:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+      "Friday: 7:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+      "Saturday: 8:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+      "Sunday: 8:00\u202fAM\u2009\u2013\u20098:00\u202fPM"
     ]
   }
 }
