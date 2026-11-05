@@ -5,6 +5,7 @@ import { PhotoGallery } from "@/components/Shared/PhotoGallery";
 import { ReviewsSection } from "@/components/Shared/ReviewsSection";
 import { HoursLocationSection } from "@/components/Shared/HoursLocationSection";
 import { StickyMobileBar } from "@/components/Shared/StickyMobileBar";
+import { StorySection } from "@/components/Shared/StorySection";
 import { ArtisanalLayout } from "@/components/Archetypes/ArtisanalLayout";
 import { TradesLayout } from "@/components/Archetypes/TradesLayout";
 import { ModernLayout } from "@/components/Archetypes/ModernLayout";
@@ -30,6 +31,7 @@ const config: ClientConfig = {
     textColor: rawConfig.theme?.textColor || "#f4f4f5",
     fontPairing: (rawConfig.theme?.fontPairing === "serif" ? "serif" : "sans") as "serif" | "sans",
   },
+  storyBlock: (rawConfig as any).storyBlock,
   beforeAfter: rawConfig.beforeAfter || {
     hasOldSite: false,
     oldScreenshotUrl: "NONE",
@@ -66,6 +68,15 @@ export default function ClientPreviewPage() {
           <TradesLayout config={config} />
         ) : (
           <ModernLayout config={config} />
+        )}
+
+        {/* Bespoke Story & Craft Narrative Section */}
+        {config.storyBlock && (
+          <StorySection
+            story={config.storyBlock}
+            businessName={config.businessName}
+            theme={theme}
+          />
         )}
 
         {/* Real Storefront & Work Photo Gallery from Google Places */}

@@ -42,6 +42,14 @@ export interface ClientHighlight {
   value: string;
 }
 
+export interface ClientStoryBlock {
+  badge?: string;
+  headline: string;
+  narrative: string;
+  statNumber?: string;
+  statLabel?: string;
+}
+
 export interface BeforeAfterConfig {
   hasOldSite: boolean;
   oldWebsiteUrl?: string;
@@ -63,6 +71,7 @@ export interface ClientConfig {
   heroCtaText: string;
   secondaryCtaText?: string;
   theme: ClientTheme;
+  storyBlock?: ClientStoryBlock;
   beforeAfter?: BeforeAfterConfig;
   highlights?: ClientHighlight[];
   photos?: ClientPhoto[];
