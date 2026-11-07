@@ -1,206 +1,519 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  Star, 
-  MapPin, 
-  Phone, 
-  Clock, 
-  ArrowRight, 
-  CheckCircle2, 
-  ChevronRight, 
-  Sparkles, 
-  ExternalLink, 
-  ShieldCheck, 
-  Heart, 
-  X, 
+import {
+  Star,
+  MapPin,
+  Phone,
+  Clock,
+  ArrowRight,
+  CheckCircle2,
+  ChevronRight,
+  Sparkles,
+  ExternalLink,
+  ShieldCheck,
+  Heart,
+  X,
   Menu as MenuIcon,
   Flame,
   Utensils,
-  Maximize2,
-  Sliders,
-  ChevronDown,
+  Award,
   ShoppingBag,
-  Info
+  Calendar,
+  Layers,
+  Info,
+  Check,
 } from "lucide-react";
 
 export default function ClientSitePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [compareModalOpen, setCompareModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("boils");
+  const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("the-boiler");
 
-  // Interactive Build-Your-Boil State
-  const [selectedCatch, setSelectedCatch] = useState(["Snow Crab Legs", "Head-On Shrimp"]);
-  const [selectedSauce, setSelectedSauce] = useState("Cap't Loui's Signature Blend");
-  const [selectedSpice, setSelectedSpice] = useState("Medium (Medium Heat)");
+  // Customizer state for interactive 4-Step Cajun Boil Builder
+  const [customCatch, setCustomCatch] = useState("Snow Crab Clusters");
+  const [customSauce, setCustomSauce] = useState("Cap't Loui Signature Sauce");
+  const [customSpice, setCustomSpice] = useState("Medium (A Little Kick)");
+  const [customSides, setCustomSides] = useState<string[]>([
+    "Garlic Noodles",
+    "Smoked Cajun Sausages",
+  ]);
 
-  const catchesList = [
-    { name: "Snow Crab Legs", price: "$18.99", popular: true },
-    { name: "Lobster Tail", price: "$22.99", popular: true },
-    { name: "Head-On Shrimp", price: "$14.99", popular: false },
-    { name: "Black Mussels", price: "$13.99", popular: false },
-    { name: "Green Mussels", price: "$14.99", popular: false },
-    { name: "Andouille Sausage", price: "$6.99", popular: true }
-  ];
-
-  const saucesList = [
-    { name: "Cap't Loui's Signature Blend", desc: "Garlic butter, cajun, lemon pepper, and secret spices combined into buttery perfection." },
-    { name: "Cajun Classic", desc: "Traditional spicy cajun kick with heavy garlic and rich Louisiana flavor." },
-    { name: "Lemon Pepper", desc: "Tangy, zesty lemon infused with savory melted butter and cracked black pepper." },
-    { name: "Garlic Butter", desc: "Rich, creamy melted garlic butter for pure comfort seafood flavor." }
-  ];
-
-  const spiceLevels = [
-    { level: "Non-Spicy", desc: "Pure buttery garlic flavor with zero heat." },
-    { level: "Mild", desc: "A gentle touch of warmth to wake up your tastebuds." },
-    { level: "Medium", desc: "Our house sweet spot — balanced kick that keeps you reaching for more." },
-    { level: "Fire", desc: "For true spice lovers who want that intense Cajun burn." }
-  ];
-
-  const toggleCatchItem = (itemName: string) => {
-    if (selectedCatch.includes(itemName)) {
-      if (selectedCatch.length > 1) {
-        setSelectedCatch(selectedCatch.filter(i => i !== itemName));
-      }
+  const toggleSide = (side: string) => {
+    if (customSides.includes(side)) {
+      setCustomSides(customSides.filter((s) => s !== side));
     } else {
-      setSelectedCatch([...selectedCatch, itemName]);
+      setCustomSides([...customSides, side]);
     }
   };
 
+  const categories = [
+    {
+      category_id: "the-boiler",
+      category_name: "The Boiler (Signature Seafood Boils)",
+      badge: "Cap't Loui Classic",
+      description:
+        "Pick your seafood, sauce, and spice level. All boils include sweet corn and boiled potatoes.",
+      items: [
+        {
+          name: "King Crab Legs Boil",
+          price: "Market Price",
+          description:
+            "Wild-caught juicy King Crab legs steeped in your choice of Cap't Loui signature sauces with potato and corn.",
+          image: "https://captloui.com/images/menu/boiler-bag.webp",
+          badge: "Bestseller",
+          tags: ["Wild Caught", "Signature", "Gluten-Free Option"],
+        },
+        {
+          name: "Snow Crab Legs Boil",
+          price: "Market Price",
+          description:
+            "Sweet and tender snow crab clusters tossed in steaming garlic butter and Louisiana Cajun seasoning.",
+          image: "https://captloui.com/images/menu/boiler-bag.webp",
+          badge: "Local Favorite",
+          tags: ["Popular", "Gluten-Free Option"],
+        },
+        {
+          name: "Whole Lobster / Lobster Tail",
+          price: "Market Price",
+          description:
+            "Succulent whole lobster or tail cooked to perfection and drenched in your choice of spice sauce.",
+          image: "https://captloui.com/images/menu/boiler-bag.webp",
+          badge: "Premium",
+          tags: ["Fresh Daily"],
+        },
+        {
+          name: "Head-On / Head-Off Shrimp Boil",
+          price: "Market Price",
+          description:
+            "Plump juicy shrimp boiled fresh and coated generously in our signature Loui sauce.",
+          image: "https://captloui.com/images/menu/boiler-bag.webp",
+          badge: "Bestseller",
+          tags: ["Customer Pick"],
+        },
+        {
+          name: "Fresh Louisiana Crawfish",
+          price: "Market Price",
+          description:
+            "Traditional live Cajun crawfish soaked in flavor-infused broth and signature spice blends.",
+          image: "https://captloui.com/images/menu/boiler-bag.webp",
+          badge: "Authentic Cajun",
+          tags: ["Spicy", "Seasonal"],
+        },
+        {
+          name: "Mussels & Clams Combo Boil",
+          price: "Market Price",
+          description:
+            "Tender green mussels and sweet clams boiled with garlic, butter, sausage, corn, and potatoes.",
+          image: "https://captloui.com/images/menu/boiler-bag.webp",
+          badge: "Chef Pick",
+          tags: ["Seafood Favorite"],
+        },
+      ],
+    },
+    {
+      category_id: "the-fryer",
+      category_name: "The Fryer (Golden Cajun Baskets)",
+      badge: "Crispy Favorites",
+      description: "Golden fried seafood served crisp with seasoned Cajun fries.",
+      items: [
+        {
+          name: "Fisherman's Platter",
+          price: "$24.95",
+          description:
+            "Ultimate combo of crispy fish, fried shrimp, calamari, and softshell crab served with Cajun fries.",
+          image: "https://captloui.com/images/menu/the-fryer.webp",
+          badge: "Ultimate Feast",
+          tags: ["Crispy", "Shareable"],
+        },
+        {
+          name: "Soft Shell Crab Basket",
+          price: "$18.95",
+          description:
+            "Crispy fried whole soft shell crab served golden brown with house Cajun dipping sauce.",
+          image: "https://captloui.com/images/menu/the-fryer.webp",
+          badge: "Specialty",
+          tags: ["Crispy"],
+        },
+        {
+          name: "Fish & Chips Basket",
+          price: "$15.95",
+          description:
+            "Flaky white fish fillets lightly battered and fried to golden crispness with Cajun fries.",
+          image: "https://captloui.com/images/menu/the-fryer.webp",
+          badge: "Classic",
+          tags: ["Top Rated"],
+        },
+        {
+          name: "Fried Shrimp Basket",
+          price: "$16.95",
+          description:
+            "Crispy golden fried jumbo shrimp served with house remoulade and seasoned fries.",
+          image: "https://captloui.com/images/menu/the-fryer.webp",
+          badge: "Bestseller",
+          tags: ["Kids Favorite"],
+        },
+        {
+          name: "Calamari Basket",
+          price: "$14.95",
+          description:
+            "Tender calamari rings lightly dusted in Cajun spiced flour and fried crisp.",
+          image: "https://captloui.com/images/menu/the-fryer.webp",
+          badge: "Appetizer Favorite",
+          tags: ["Crispy"],
+        },
+      ],
+    },
+    {
+      category_id: "sandwiches",
+      category_name: "Cajun Sandwiches & Po'boys",
+      badge: "House Made",
+      description:
+        "Served on toasted French bread with lettuce, tomatoes, and signature sauces.",
+      items: [
+        {
+          name: "New England Lobster Roll",
+          price: "$22.95",
+          description:
+            "Chilled sweet lobster meat lightly dressed in lemon-butter sauce on a toasted split-top brioche roll.",
+          image: "https://captloui.com/images/menu/sandwich.webp",
+          badge: "Signature",
+          tags: ["Chef Pick", "Fresh Lobster"],
+        },
+        {
+          name: "Crispy Fish Po'boy",
+          price: "$14.95",
+          description:
+            "Golden fried white fish fillet packed into toasted french bread with signature Loui sauce.",
+          image: "https://captloui.com/images/menu/sandwich.webp",
+          badge: "Highly Reviewed",
+          tags: ["Staff Pick"],
+        },
+        {
+          name: "Fried Shrimp Po'boy",
+          price: "$15.95",
+          description:
+            "Crispy Cajun seasoned jumbo shrimp piled high with house sauce and fresh greens.",
+          image: "https://captloui.com/images/menu/sandwich.webp",
+          badge: "Bestseller",
+          tags: ["Authentic"],
+        },
+        {
+          name: "Softshell Crab Po'boy",
+          price: "$17.95",
+          description:
+            "Whole crispy fried softshell crab nestled in warm toasted French bread with spicy sauce.",
+          image: "https://captloui.com/images/menu/sandwich.webp",
+          badge: "Delicacy",
+          tags: ["Crispy"],
+        },
+      ],
+    },
+    {
+      category_id: "soups-and-sides",
+      category_name: "Soups & Boil Side Dishes",
+      badge: "Must-Add Sides",
+      description:
+        "Perfect accompaniments to soak up every drop of signature garlic butter sauce.",
+      items: [
+        {
+          name: "Cap't Loui Garlic Noodles",
+          price: "$8.95",
+          description:
+            "Wok-tossed noodles coated in rich roasted garlic butter and herbs.",
+          image: "https://captloui.com/images/menu/sides.jpg",
+          badge: "Must Try",
+          tags: ["Fan Favorite"],
+        },
+        {
+          name: "Louisiana Seafood Jambalaya",
+          price: "$9.95",
+          description:
+            "Slow-simmered rice dish packed with sausage, chicken, shrimp, and aromatic Cajun spices.",
+          image: "https://captloui.com/images/menu/soups.webp",
+          badge: "House Specialty",
+          tags: ["Warm & Comforting"],
+        },
+        {
+          name: "New England Clam Chowder",
+          price: "$8.95",
+          description:
+            "Rich cream-based chowder packed with sweet clams and tender potatoes.",
+          image: "https://captloui.com/images/menu/soups.webp",
+          badge: "Classic",
+          tags: ["Creamy"],
+        },
+        {
+          name: "Cajun Sausages & Corn Sides",
+          price: "$5.95",
+          description:
+            "Smoked savory Cajun sausage slices, sweet corn on the cob, and tender potatoes.",
+          image: "https://captloui.com/images/menu/sides.jpg",
+          badge: "Essential",
+          tags: ["Boil Classic"],
+        },
+      ],
+    },
+  ];
+
+  const reviews = [
+    {
+      author: "Allison A",
+      text: "We been to many seafood boil places and this place is the best!!! The seasoning is perfect and not too salty and the staff was SO nice!!! Like I’ve never experienced such nice customer service in NJ! They were so accommodating to our toddler and were just amaz",
+      rating: 5,
+      relativeTime: "2 weeks ago",
+      verifiedGoogle: true,
+    },
+    {
+      author: "Trisha T",
+      text: "Omgggg this seafood boil was sooo good 😭 everything was hot fresh and full of flavor. They definitely not stingy with the portions either. The crab legs lobster shrimp corn potatoes literally everything was soaking in that sauceeee 😆 gloves went on and being c",
+      rating: 5,
+      relativeTime: "2 months ago",
+      verifiedGoogle: true,
+    },
+    {
+      author: "Juni S.",
+      text: "Our experience at Cap’t Louie in Edison was spectacular and I find one of the best seafood boil places in central Jersey. My wife and I ordered the custom 2lb combo with snow crab legs, head on shrimp, and scallops with the free side of sausage all in the Cap’t",
+      rating: 5,
+      relativeTime: "4 months ago",
+      verifiedGoogle: true,
+    },
+    {
+      author: "Nekia Williams",
+      text: "I can no longer eat shellfish, so I had a fish po boy and it was so good. The sauce was amazing. The Cajun fries are the first I had that actually taste like true Cajun. This place was so clean and the staff are very pleasant. I will definitely be returning. M",
+      rating: 5,
+      relativeTime: "a month ago",
+      verifiedGoogle: true,
+    },
+  ];
+
+  const schedule = [
+    "Monday: 11:30 AM – 10:00 PM",
+    "Tuesday: 11:30 AM – 10:00 PM",
+    "Wednesday: 11:30 AM – 10:00 PM",
+    "Thursday: 11:30 AM – 10:00 PM",
+    "Friday: 11:30 AM – 11:00 PM",
+    "Saturday: 11:30 AM – 11:00 PM",
+    "Sunday: 11:30 AM – 10:00 PM",
+  ];
+
   return (
-    <div className="min-h-screen bg-[#0D0F12] text-[#F3F4F6] font-sans selection:bg-[#D32F2F] selection:text-white">
-      
+    <div className="min-h-screen bg-[#0C0E12] text-[#F5F5F7] font-sans selection:bg-[#C62828] selection:text-white">
       {/* TOP DEMO BAR */}
-      <div className="bg-[#171A1F] border-b border-[#2A2E39] text-xs sm:text-sm py-2.5 px-4 sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 shadow-md">
+      <div className="bg-gradient-to-r from-[#C62828] via-[#8E0000] to-[#161920] text-white px-4 py-2.5 text-xs md:text-sm font-medium sticky top-0 z-50 shadow-lg border-b border-[#FFA000]/30 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="bg-[#D32F2F] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">PROTOTYPE</span>
-          <span className="text-[#F3F4F6] font-medium">
-            Live Concept Preview crafted for <strong className="text-[#F59E0B]">Cap&rsquo;t Loui - Edison, NJ</strong>
-          </span>
+          <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#FFA000] animate-pulse"></span>
+          <span className="font-semibold">Live Concept Preview crafted for Cap&rsquo;t Loui - Edison, NJ</span>
+          <span className="hidden md:inline-block opacity-80">• Built by Apex Digital Architects</span>
         </div>
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setCompareModalOpen(true)}
-            className="flex items-center gap-1.5 bg-[#F59E0B]/10 hover:bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/30 px-3 py-1 rounded-md font-semibold transition-all text-xs"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>⚡ Compare Before vs. After</span>
-          </button>
-          <a 
-            href="#contact" 
-            className="hidden sm:inline-flex items-center gap-1 bg-[#D32F2F] hover:bg-[#B71C1C] text-white px-3 py-1 rounded-md font-medium transition-all text-xs"
-          >
-            <span>Claim This Design</span>
-            <ArrowRight className="w-3 h-3" />
-          </a>
-        </div>
+        <button
+          onClick={() => setDemoModalOpen(true)}
+          className="bg-white/15 hover:bg-white/25 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-all border border-white/25 flex items-center gap-1.5 shadow-sm"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#FFA000]" />
+          ⚡ Compare Before vs. After
+        </button>
       </div>
 
-      {/* NAVIGATION */}
-      <header className="sticky top-[41px] sm:top-[45px] z-40 bg-[#0D0F12]/95 backdrop-blur-md border-b border-[#171A1F]">
+      {/* COMPARISON MODAL */}
+      {demoModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#161920] border border-[#FFA000]/40 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button
+              onClick={() => setDemoModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-full transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex items-center gap-2 text-[#FFA000] mb-2 text-sm font-semibold tracking-wider uppercase">
+              <ShieldCheck className="w-4 h-4" /> Transformation Audit Dossier
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Cap&rsquo;t Loui Edison: Uplift Analysis
+            </h3>
+            <p className="text-gray-300 text-sm mb-6">
+              We analyzed the existing web presence for your 4.9-star Edison location (1,989+ Google reviews) and crafted this bespoke digital experience to solve critical local friction points and maximize guest conversion.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {/* OLD SITE PREVIEW */}
+              <div className="bg-black/40 rounded-xl p-4 border border-red-500/30 flex flex-col">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-red-400 font-semibold text-sm flex items-center gap-1.5">
+                    <X className="w-4 h-4" /> Previous Web Friction
+                  </span>
+                  <span className="text-xs bg-red-500/20 text-red-300 px-2 py-0.5 rounded">
+                    Off-site Reliance
+                  </span>
+                </div>
+                <div className="relative rounded-lg overflow-hidden border border-gray-800 mb-3 bg-gray-900 flex-1 min-h-[220px]">
+                  <img
+                    src="https://iad.microlink.io/zEFjafiaicBUQI1xwFg4c2oJEZfrlVRWKIPwlAORfWWWPlA4oTCEJ3IeBgs3IL5UhW0W_QThKr-qbLT4Rs6cCQ.png"
+                    alt="Old Cap't Loui Mobile Site Screenshot"
+                    className="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"
+                  />
+                </div>
+                <ul className="text-xs text-gray-400 space-y-1.5 list-disc pl-4">
+                  <li>Directs users off-site to generic delivery links instantly.</li>
+                  <li>Lacks interactive visual Cajun boil builders on mobile.</li>
+                  <li>Menu lacks rich photography and clear item pricing structure.</li>
+                </ul>
+              </div>
+
+              {/* NEW BESPOKE UPLIFT */}
+              <div className="bg-black/40 rounded-xl p-4 border border-emerald-500/30 flex flex-col">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-emerald-400 font-semibold text-sm flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4" /> Apex Custom Architecture
+                  </span>
+                  <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">
+                    High Conversion
+                  </span>
+                </div>
+                <div className="rounded-lg bg-gradient-to-br from-[#C62828]/20 to-[#161920] border border-[#FFA000]/30 p-4 mb-3 flex-1 flex flex-col justify-center">
+                  <div className="text-center">
+                    <span className="text-2xl font-extrabold text-white">4.9 ★</span>
+                    <p className="text-xs text-gray-300 mt-1">
+                      1,989+ verified local reviews highlighted with interactive 4-step custom boil builder &amp; direct OpenTable sync.
+                    </p>
+                  </div>
+                </div>
+                <ul className="text-xs text-gray-300 space-y-1.5 list-disc pl-4">
+                  <li>Interactive 4-Step Boil Customizer built right into the page.</li>
+                  <li>Full menu catalog with pricing, category tabs &amp; real photography.</li>
+                  <li>Lightning-fast mobile experience with bottom sticky action dock.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setDemoModalOpen(false)}
+                className="bg-[#C62828] hover:bg-[#a51d1d] text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-[#C62828]/30"
+              >
+                Explore Live Concept
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* NAVIGATION BAR */}
+      <header className="sticky top-[37px] z-40 bg-[#0C0E12]/95 backdrop-blur-md border-b border-gray-800 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          
-          {/* Logo / Brand */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#D32F2F] to-[#991B1B] flex items-center justify-center shadow-lg shadow-[#D32F2F]/20 group-hover:scale-105 transition-transform">
-              <Utensils className="w-6 h-6 text-white" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C62828] to-[#FFA000] flex items-center justify-center shadow-lg shadow-[#C62828]/30">
+              <Utensils className="w-5 h-5 text-white" />
             </div>
             <div>
-              <span className="font-extrabold text-xl sm:text-2xl tracking-tight text-white block leading-none">
+              <span className="text-xl font-black tracking-tight text-white block">
                 CAP&rsquo;T LOUI
               </span>
-              <span className="text-xs text-[#F59E0B] font-semibold uppercase tracking-widest mt-1 block">
-                Edison, NJ • Route 27
+              <span className="text-xs text-[#FFA000] font-semibold tracking-widest uppercase block -mt-1">
+                Edison, NJ • 4.9 ★
               </span>
             </div>
-          </a>
+          </div>
 
-          {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-            <a href="#about" className="hover:text-[#F59E0B] transition-colors">Our Story</a>
-            <a href="#builder" className="hover:text-[#F59E0B] transition-colors flex items-center gap-1">
-              <span>Build A Boil</span>
-              <span className="bg-[#D32F2F] text-white text-[9px] px-1.5 py-0.5 rounded font-bold">HOT</span>
-            </a>
-            <a href="#menu" className="hover:text-[#F59E0B] transition-colors">Menu & Sauces</a>
-            <a href="#gallery" className="hover:text-[#F59E0B] transition-colors">Feast Gallery</a>
-            <a href="#reviews" className="hover:text-[#F59E0B] transition-colors flex items-center gap-1">
-              <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" />
-              <span>4.9★ (1,989)</span>
-            </a>
+            <a href="#about" className="hover:text-[#FFA000] transition-colors">Our Story</a>
+            <a href="#builder" className="hover:text-[#FFA000] transition-colors">Build Boil</a>
+            <a href="#menu" className="hover:text-[#FFA000] transition-colors">Full Menu</a>
+            <a href="#gallery" className="hover:text-[#FFA000] transition-colors">Gallery</a>
+            <a href="#reviews" className="hover:text-[#FFA000] transition-colors">Reviews</a>
+            <a href="#contact" className="hover:text-[#FFA000] transition-colors">Location</a>
           </nav>
 
-          {/* Action CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="text-right">
-              <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Open Now • Closes 10 PM
-              </span>
-            </div>
-            <a 
-              href="tel:7323398019" 
-              className="bg-[#D32F2F] hover:bg-[#b91c1c] text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-[#D32F2F]/25 flex items-center gap-2 transition-all hover:scale-[1.02]"
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-transparent hover:bg-white/5 text-white border border-gray-700 hover:border-[#FFA000] px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2"
             >
-              <Phone className="w-4 h-4" />
-              <span>(732) 339-8019</span>
+              <ShoppingBag className="w-4 h-4 text-[#FFA000]" /> Order Online
+            </a>
+            <a
+              href="https://www.opentable.com/r/capt-loui-edison-reservations-edison?restref=1484617&lang=en-US&ot_source=Restaurant%20website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#C62828] hover:bg-[#a51d1d] text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-[#C62828]/30 flex items-center gap-2"
+            >
+              <Calendar className="w-4 h-4" /> Book Table
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 rounded-xl bg-[#171A1F] text-gray-300 hover:text-white border border-[#2A2E39]"
+            className="md:hidden text-gray-300 hover:text-white p-2"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+            <MenuIcon className="w-6 h-6" />
           </button>
         </div>
 
-        {/* Mobile Menu Dropdown */}
+        {/* MOBILE MENU DROPDOWN */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#171A1F] border-b border-[#2A2E39] px-6 py-6 space-y-4 animate-in slide-in-from-top duration-200">
-            <a 
-              href="#about" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-base font-medium text-gray-200 hover:text-[#F59E0B]"
-            >
-              Our Story
-            </a>
-            <a 
-              href="#builder" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-base font-medium text-gray-200 hover:text-[#F59E0B]"
-            >
-              Build Your Boil 🦐
-            </a>
-            <a 
-              href="#menu" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-base font-medium text-gray-200 hover:text-[#F59E0B]"
-            >
-              Signature Sauces & Menu
-            </a>
-            <a 
-              href="#gallery" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-base font-medium text-gray-200 hover:text-[#F59E0B]"
-            >
-              Hands-On Feast Gallery
-            </a>
-            <a 
-              href="#reviews" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-base font-medium text-gray-200 hover:text-[#F59E0B]"
-            >
-              Wall of Praise (4.9★)
-            </a>
-            <div className="pt-4 border-t border-gray-800 flex flex-col gap-3">
-              <a 
-                href="tel:7323398019" 
-                className="w-full bg-[#D32F2F] text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-md"
+          <div className="md:hidden bg-[#161920] border-b border-gray-800 px-4 py-6 space-y-4 animate-in slide-in-from-top duration-200">
+            <nav className="flex flex-col space-y-3 text-base font-medium">
+              <a
+                href="#about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-[#FFA000]"
               >
-                <Phone className="w-4 h-4" />
-                <span>Call (732) 339-8019</span>
+                Our Story
+              </a>
+              <a
+                href="#builder"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-[#FFA000]"
+              >
+                Build Boil
+              </a>
+              <a
+                href="#menu"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-[#FFA000]"
+              >
+                Full Menu
+              </a>
+              <a
+                href="#gallery"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-[#FFA000]"
+              >
+                Gallery
+              </a>
+              <a
+                href="#reviews"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-[#FFA000]"
+              >
+                Reviews
+              </a>
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-[#FFA000]"
+              >
+                Location &amp; Hours
+              </a>
+            </nav>
+            <div className="pt-4 border-t border-gray-800 flex flex-col gap-3">
+              <a
+                href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-transparent text-center text-white border border-gray-700 py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
+              >
+                <ShoppingBag className="w-4 h-4 text-[#FFA000]" /> Order Online (UberEats)
+              </a>
+              <a
+                href="https://www.opentable.com/r/capt-loui-edison-reservations-edison?restref=1484617&lang=en-US&ot_source=Restaurant%20website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#C62828] text-center text-white py-3 rounded-xl text-sm font-semibold shadow-lg shadow-[#C62828]/30 flex items-center justify-center gap-2"
+              >
+                <Calendar className="w-4 h-4" /> Reserve on OpenTable
               </a>
             </div>
           </div>
@@ -208,901 +521,638 @@ export default function ClientSitePage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32 bg-gradient-to-b from-[#0D0F12] via-[#12151B] to-[#0D0F12]">
-        {/* Background neon glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32F2F]/10 blur-[140px] rounded-full pointer-events-none"></div>
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-[#F59E0B]/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#161920] to-[#0C0E12] py-20 px-4">
+        {/* Background Atmosphere */}
+        <div className="absolute inset-0 z-0 opacity-30 mix-blend-luminosity">
+          <img
+            src="https://lh3.googleusercontent.com/grass-cs/AABkmLf3_lnbDP8OySa0WgBo63_L68CH-WULNHJIqDgF3V7kegHR21lWd-OH16Nlwjme9qB4LRmeoKakytGjzkmxmTW27-GKgQdrLOzsGmNahy3lzRf5fv_oomXoF1fjzdre9sVPY3l4cyz20tY=s4800-w1000-h800"
+            alt="Cap't Loui Edison Seafood Boil Feast"
+            className="w-full h-full object-cover scale-105"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E12] via-[#0C0E12]/80 to-transparent z-0"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Column Content */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-[#171A1F] border border-[#2A2E39] px-3.5 py-1.5 rounded-full shadow-inner">
-                <div className="flex text-[#F59E0B]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-[#F59E0B]" />
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+          {/* Trust Badge */}
+          <div className="inline-flex items-center gap-2 bg-[#161920]/95 border border-[#FFA000]/40 px-4 py-2 rounded-full shadow-xl">
+            <div className="flex items-center text-[#FFA000]">
+              <Star className="w-4 h-4 fill-[#FFA000]" />
+              <Star className="w-4 h-4 fill-[#FFA000]" />
+              <Star className="w-4 h-4 fill-[#FFA000]" />
+              <Star className="w-4 h-4 fill-[#FFA000]" />
+              <Star className="w-4 h-4 fill-[#FFA000]" />
+            </div>
+            <span className="text-xs sm:text-sm font-bold text-white">4.9 ★ (1,989+ Google Reviews)</span>
+            <span className="text-xs bg-[#C62828] text-white px-2 py-0.5 rounded-full font-semibold">
+              Edison&rsquo;s #1 Boil
+            </span>
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-tight">
+            Steam. Toss. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C62828] to-[#FFA000]">Feast.</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Edison&rsquo;s legendary Cajun seafood boil house. Fresh wild-caught King Crab, plump shrimp, and succulent lobster soaked in our secret signature garlic-butter spice.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <a
+              href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-[#C62828] hover:bg-[#a51d1d] text-white px-8 py-4 rounded-2xl font-bold text-base shadow-xl shadow-[#C62828]/40 transition-all flex items-center justify-center gap-3 group"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              Order Online Now
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="https://www.opentable.com/r/capt-loui-edison-reservations-edison?restref=1484617&lang=en-US&ot_source=Restaurant%20website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-[#161920] hover:bg-gray-800 text-white border border-gray-700 hover:border-[#FFA000] px-8 py-4 rounded-2xl font-bold text-base transition-all flex items-center justify-center gap-3"
+            >
+              <Calendar className="w-5 h-5 text-[#FFA000]" />
+              Reserve a Table
+            </a>
+          </div>
+
+          {/* Location Quick Info Bar */}
+          <div className="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
+            <div className="bg-[#161920]/80 border border-gray-800 rounded-xl p-4 flex items-center gap-3">
+              <MapPin className="w-5 h-5 text-[#FFA000] shrink-0" />
+              <div>
+                <span className="text-xs text-gray-400 block font-medium">Location</span>
+                <span className="text-sm font-semibold text-white">1779 NJ-27, Edison, NJ 08817</span>
+              </div>
+            </div>
+            <div className="bg-[#161920]/80 border border-gray-800 rounded-xl p-4 flex items-center gap-3">
+              <Phone className="w-5 h-5 text-[#FFA000] shrink-0" />
+              <div>
+                <span className="text-xs text-gray-400 block font-medium">Direct Line</span>
+                <a href="tel:7323398019" className="text-sm font-semibold text-white hover:text-[#FFA000]">
+                  (732) 339-8019
+                </a>
+              </div>
+            </div>
+            <div className="bg-[#161920]/80 border border-gray-800 rounded-xl p-4 flex items-center gap-3">
+              <Clock className="w-5 h-5 text-emerald-400 shrink-0" />
+              <div>
+                <span className="text-xs text-emerald-400 block font-semibold">Open Now</span>
+                <span className="text-sm font-semibold text-white">Closes 10:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BRAND STORY & HERITAGE */}
+      <section id="about" className="py-24 bg-[#161920] border-y border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 bg-[#C62828]/20 border border-[#C62828]/40 px-3 py-1 rounded-full text-[#C62828] text-xs font-bold uppercase tracking-wider">
+                <Award className="w-3.5 h-3.5" /> Since 2016 Heritage
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                From Kitchen Craft to Central Jersey&rsquo;s Favorite Seafood Boil
+              </h2>
+              <p className="text-gray-300 text-base leading-relaxed">
+                Cap&rsquo;t Loui wasn&rsquo;t born from a generic corporate plan. Our story started unexpectedly in 2016 in Stoneham, MA—working hard in the kitchen, mastering authentic Cajun spice blends, and discovering the joy of bringing people together over steaming buckets of fresh seafood.
+              </p>
+              <p className="text-gray-300 text-base leading-relaxed">
+                We built Cap’t Loui on a simple belief: every meal should be a memorable experience where genuine care shows up in every detail. From sweet king crab legs and tender shrimp to our secret garlic-butter sauces and signature Cajun fries, we source the freshest seafood and prep everything daily. Our Edison location carries this legacy forward every single day, making sure every customer leaves full, happy, and ready for another feast.
+              </p>
+              <div className="pt-4 grid grid-cols-3 gap-4 border-t border-gray-800">
+                <div>
+                  <span className="text-2xl sm:text-3xl font-black text-[#FFA000] block">1,989+</span>
+                  <span className="text-xs text-gray-400 font-medium">5-Star Google Reviews</span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-black text-[#FFA000] block">100%</span>
+                  <span className="text-xs text-gray-400 font-medium">Fresh Daily Sourcing</span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-black text-[#FFA000] block">5</span>
+                  <span className="text-xs text-gray-400 font-medium">Signature Heat Levels</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-[#C62828] to-[#FFA000] rounded-3xl opacity-30 blur-lg"></div>
+              <div className="relative rounded-2xl overflow-hidden border border-gray-700 shadow-2xl bg-black">
+                <img
+                  src="https://captloui.com/images/stores/capt-loui-edison.webp"
+                  alt="Cap't Loui Edison Interior & Atmosphere"
+                  className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* INTERACTIVE 4-STEP CAJUN BOIL BUILDER */}
+      <section id="builder" className="py-24 bg-[#0C0E12] relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-16">
+            <span className="text-[#FFA000] text-xs font-bold uppercase tracking-widest bg-[#FFA000]/10 px-3 py-1 rounded-full">
+              Interactive Experience
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Build Your Custom Cap&rsquo;t Loui Seafood Bucket
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+              Design your personalized boil bag step-by-step. Choose your catch, coat in secret sauce, set your heat, and pick your sides.
+            </p>
+          </div>
+
+          <div className="bg-[#161920] border border-gray-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              {/* STEP 1: CATCH */}
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-[#FFA000] uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-[#FFA000] text-black flex items-center justify-center text-xs font-black">1</span>
+                  Pick Your Catch
+                </label>
+                <select
+                  value={customCatch}
+                  onChange={(e) => setCustomCatch(e.target.value)}
+                  className="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#FFA000]"
+                >
+                  <option>King Crab Legs</option>
+                  <option>Snow Crab Clusters</option>
+                  <option>Lobster Tail</option>
+                  <option>Head-On Shrimp</option>
+                  <option>Louisiana Crawfish</option>
+                  <option>Green Mussels</option>
+                  <option>Sweet Clams</option>
+                </select>
+              </div>
+
+              {/* STEP 2: SAUCE */}
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-[#FFA000] uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-[#FFA000] text-black flex items-center justify-center text-xs font-black">2</span>
+                  Sauce It Up
+                </label>
+                <select
+                  value={customSauce}
+                  onChange={(e) => setCustomSauce(e.target.value)}
+                  className="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#FFA000]"
+                >
+                  <option>Cap&rsquo;t Loui Signature Sauce</option>
+                  <option>Lemon Pepper Butter</option>
+                  <option>Garlic Butter</option>
+                  <option>Cajun Classic Sauce</option>
+                </select>
+              </div>
+
+              {/* STEP 3: SPICE LEVEL */}
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-[#FFA000] uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-[#FFA000] text-black flex items-center justify-center text-xs font-black">3</span>
+                  Pick Your Spice Level
+                </label>
+                <select
+                  value={customSpice}
+                  onChange={(e) => setCustomSpice(e.target.value)}
+                  className="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#FFA000]"
+                >
+                  <option>Mild (Flavorful)</option>
+                  <option>Medium (A Little Kick)</option>
+                  <option>Hot (True Cajun)</option>
+                  <option>X-Hot (Serious Spice)</option>
+                  <option>2X-Hot (Inferno Extreme)</option>
+                </select>
+              </div>
+
+              {/* STEP 4: SIDES */}
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-[#FFA000] uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-[#FFA000] text-black flex items-center justify-center text-xs font-black">4</span>
+                  Select Add-on Sides (Toggle)
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Garlic Noodles",
+                    "Smoked Cajun Sausages",
+                    "Cajun Seasoned Fries",
+                    "Boiled Eggs",
+                    "Garlic Bread",
+                    "Extra Loui Sauce",
+                  ].map((side) => {
+                    const isSelected = customSides.includes(side);
+                    return (
+                      <button
+                        key={side}
+                        type="button"
+                        onClick={() => toggleSide(side)}
+                        className={`text-xs px-3 py-2 rounded-xl font-medium transition-all border ${
+                          isSelected
+                            ? "bg-[#C62828] text-white border-[#C62828]"
+                            : "bg-black/30 text-gray-300 border-gray-700 hover:border-gray-500"
+                        }`}
+                      >
+                        {side} {isSelected && "✓"}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* SUMMARY CARD */}
+            <div className="bg-black/60 border border-[#FFA000]/30 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="space-y-2 text-center md:text-left">
+                <span className="text-xs text-[#FFA000] font-bold tracking-widest uppercase block">
+                  Your Custom Boil Summary
+                </span>
+                <h4 className="text-lg sm:text-xl font-bold text-white">
+                  {customCatch} in {customSauce} ({customSpice})
+                </h4>
+                <p className="text-xs text-gray-400">
+                  Sides included: {customSides.join(", ") || "None selected"} + Corn &amp; Potatoes
+                </p>
+              </div>
+
+              <a
+                href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto bg-[#C62828] hover:bg-[#a51d1d] text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-[#C62828]/30 transition-all flex items-center justify-center gap-2 shrink-0"
+              >
+                <ShoppingBag className="w-4 h-4" /> Order This Bucket Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPREHENSIVE CATALOG & MENU SECTION */}
+      <section id="menu" className="py-24 bg-[#161920] border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-12">
+            <span className="text-[#FFA000] text-xs font-bold uppercase tracking-widest bg-[#FFA000]/10 px-3 py-1 rounded-full">
+              Full Seafood Boil &amp; Cajun Kitchen Menu
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Fresh Seafood, Bold Spices &amp; Sauces
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+              Explore our complete offering prepared daily in Edison, NJ.
+            </p>
+          </div>
+
+          {/* CATEGORY TABS */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+            {categories.map((cat) => (
+              <button
+                key={cat.category_id}
+                onClick={() => setActiveCategory(cat.category_id)}
+                className={`px-5 py-3 rounded-xl text-sm font-bold transition-all shadow-md ${
+                  activeCategory === cat.category_id
+                    ? "bg-[#C62828] text-white shadow-[#C62828]/40 scale-105"
+                    : "bg-[#0C0E12] text-gray-300 hover:bg-gray-800 border border-gray-800"
+                }`}
+              >
+                {cat.category_name}
+              </button>
+            ))}
+          </div>
+
+          {/* ACTIVE CATEGORY CONTENT */}
+          {categories
+            .filter((cat) => cat.category_id === activeCategory)
+            .map((cat) => (
+              <div key={cat.category_id} className="space-y-8 animate-in fade-in duration-300">
+                <div className="text-center max-w-2xl mx-auto mb-8">
+                  <span className="text-xs font-semibold text-[#FFA000] uppercase tracking-wider block mb-1">
+                    {cat.badge}
+                  </span>
+                  <p className="text-gray-300 text-sm">{cat.description}</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {cat.items.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-[#0C0E12] border border-gray-800 rounded-2xl overflow-hidden shadow-lg flex flex-col hover:border-[#FFA000]/50 transition-all group"
+                    >
+                      <div className="relative h-48 overflow-hidden bg-gray-900">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <span className="absolute top-3 left-3 bg-[#C62828] text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow-md">
+                          {item.badge}
+                        </span>
+                        <span className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-[#FFA000] text-xs font-bold px-3 py-1 rounded-lg border border-[#FFA000]/30 shadow-md">
+                          {item.price}
+                        </span>
+                      </div>
+
+                      <div className="p-6 flex flex-col flex-1 justify-between space-y-4">
+                        <div className="space-y-2">
+                          <h3 className="text-lg font-bold text-white group-hover:text-[#FFA000] transition-colors">
+                            {item.name}
+                          </h3>
+                          <p className="text-gray-400 text-xs leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap items-center justify-between gap-2 pt-4 border-t border-gray-800">
+                          <div className="flex flex-wrap gap-1">
+                            {item.tags.map((tag, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="text-[10px] bg-white/5 text-gray-300 px-2 py-0.5 rounded border border-gray-800"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <a
+                            href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-[#FFA000] hover:underline flex items-center gap-1"
+                          >
+                            Order <ArrowRight className="w-3 h-3" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <span className="text-xs font-semibold text-gray-300">
-                  Edison&rsquo;s Top-Rated Seafood Boil • <strong className="text-white">4.9★ on Google</strong>
-                </span>
               </div>
-
-              {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-                Gloves On, Flavor In: <br />
-                <span className="bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#D32F2F] bg-clip-text text-transparent">
-                  Central Jersey&rsquo;s Premier Seafood Boil
-                </span>
-              </h1>
-
-              {/* Subtitle / Narrative */}
-              <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                At Cap&rsquo;t Loui Edison, every boil is crafted to order with fresh catches soaked in our secret-recipe house garlic butter sauces. We deliver an unforgettable, hands-on dining feast backed by warm Central Jersey hospitality.
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                <a 
-                  href="#builder" 
-                  className="w-full sm:w-auto bg-[#D32F2F] hover:bg-[#b91c1c] text-white px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-[#D32F2F]/30 flex items-center justify-center gap-3 transition-all hover:scale-105"
-                >
-                  <Flame className="w-5 h-5 text-amber-300 animate-bounce" />
-                  <span>Build Your Boil Combo</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a 
-                  href="https://maps.google.com/?q=1779+NJ-27+Edison+NJ+08817" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto bg-[#171A1F] hover:bg-[#20242D] text-gray-200 border border-[#2A2E39] px-6 py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 transition-all"
-                >
-                  <MapPin className="w-4 h-4 text-[#F59E0B]" />
-                  <span>Get Directions (Route 27)</span>
-                </a>
-              </div>
-
-              {/* Quick Trust Bar */}
-              <div className="pt-8 border-t border-[#171A1F] grid grid-cols-3 gap-4 text-center lg:text-left">
-                <div>
-                  <div className="text-2xl font-extrabold text-white">1,900+</div>
-                  <div className="text-xs text-gray-400 mt-0.5">5-Star Google Reviews</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-extrabold text-[#F59E0B]">Fresh</div>
-                  <div className="text-xs text-gray-400 mt-0.5">Daily Catches & Crabs</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-extrabold text-white">Route 27</div>
-                  <div className="text-xs text-gray-400 mt-0.5">Easy Parking in Edison</div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right Column Visual Showcase */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                
-                {/* Main Featured Photo Card */}
-                <div className="rounded-3xl overflow-hidden border-2 border-[#2A2E39] shadow-2xl shadow-black/80 bg-[#171A1F] relative group">
-                  <img 
-                    src="https://lh3.googleusercontent.com/grass-cs/AABkmLf3_lnbDP8OySa0WgBo63_L68CH-WULNHJIqDgF3V7kegHR21lWd-OH16Nlwjme9qB4LRmeoKakytGjzkmxmTW27-GKgQdrLOzsGmNahy3lzRf5fv_oomXoF1fjzdre9sVPY3l4cyz20tY=s4800-w1000-h800" 
-                    alt="Cap't Loui Seafood Boil Feast" 
-                    className="w-full h-[380px] sm:h-[440px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  
-                  {/* Floating Badge */}
-                  <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-[#F59E0B]/40 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg">
-                    <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
-                    <span>Piping Hot & Buttery</span>
-                  </div>
-
-                  {/* Bottom Image Overlay Info */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-20">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="text-xs text-[#F59E0B] font-bold uppercase tracking-wider block">Featured Feast</span>
-                        <h3 className="text-lg font-bold text-white">Snow Crab, Shrimp & Garlic Butter</h3>
-                      </div>
-                      <div className="bg-[#D32F2F] text-white p-2.5 rounded-xl shadow-md">
-                        <Utensils className="w-5 h-5" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating mini testimonial badge */}
-                <div className="absolute -bottom-6 -left-6 sm:-left-8 bg-[#171A1F]/95 backdrop-blur-md border border-[#2A2E39] p-4 rounded-2xl shadow-2xl max-w-[260px] hidden sm:block">
-                  <div className="flex items-center gap-1 text-[#F59E0B] mb-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-[#F59E0B]" />
-                    ))}
-                  </div>
-                  <p className="text-xs text-gray-300 italic">
-                    &ldquo;The seasoning is perfect and not too salty! Best seafood boil in Central Jersey.&rdquo;
-                  </p>
-                  <span className="text-[10px] font-bold text-gray-400 mt-1 block">— Allison A. (Google Review)</span>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
+            ))}
         </div>
       </section>
 
-      {/* BRAND STORY & CRAFT */}
-      <section id="about" className="py-20 bg-[#12151B] border-t border-[#171A1F]">
+      {/* REAL PHOTO SHOWCASE GALLERY */}
+      <section id="gallery" className="py-24 bg-[#0C0E12]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 bg-[#D32F2F]/10 text-[#D32F2F] border border-[#D32F2F]/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                Our Edison Roots
-              </div>
-              
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Where Central Jersey Comes to Get Their Hands Dirty & Feast
-              </h2>
-
-              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                Located right on Route 27 in Edison, NJ, Cap&rsquo;t Loui was born out of a simple obsession: bringing the authentic, messy, high-energy spirit of coastal Cajun boils straight to our neighborhood. We don&rsquo;t just serve seafood—we curate an experience.
-              </p>
-
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                From our signature house garlic butter blend to our freshly sourced snow crabs, lobster tails, and Louisiana-style po&rsquo; boys, every batch is prepared fresh, tossed in spice bags, and served piping hot. Grab your bib, put on your gloves, and dive in.
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-4 pt-4">
-                <div className="bg-[#171A1F] p-4 rounded-2xl border border-[#2A2E39]">
-                  <div className="text-[#F59E0B] font-bold text-lg mb-1">🔥 Custom Spice Levels</div>
-                  <p className="text-xs text-gray-400">From mild garlic butter to blazing Fire heat tailored to your exact taste.</p>
-                </div>
-                <div className="bg-[#171A1F] p-4 rounded-2xl border border-[#2A2E39]">
-                  <div className="text-[#F59E0B] font-bold text-lg mb-1">🦐 Premium Catches</div>
-                  <p className="text-xs text-gray-400">Hand-selected snow crab, juicy shrimp, mussels, and lobster tail.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6 grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <img 
-                  src="https://lh3.googleusercontent.com/grass-cs/AABkmLcvxI39BFZYoHzxRzrYjJkwRQFQLcAJpTsFo7MfbWxEOYInt0v0iSrLrIUyGqwTq7i8NJ3GoL76J0wrmtnegbCJJGuRWTojQ4z5CXbHX--lQ3vFzzySFHifIMh0Ie1f6QN2XRhSyI6OnSum=s4800-w1000-h800" 
-                  alt="Cap't Loui Interior Edison" 
-                  className="rounded-2xl object-cover h-64 w-full border border-[#2A2E39] shadow-lg"
-                />
-                <div className="bg-[#D32F2F] p-6 rounded-2xl text-white shadow-xl">
-                  <div className="text-3xl font-extrabold mb-1">4.9 ★</div>
-                  <div className="text-xs text-red-100 uppercase tracking-widest font-semibold">Verified Google Rating across 1,989+ reviews</div>
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="bg-[#171A1F] p-6 rounded-2xl border border-[#2A2E39] text-gray-300">
-                  <ShieldCheck className="w-8 h-8 text-[#F59E0B] mb-2" />
-                  <h4 className="text-white font-bold text-base mb-1">Spotless & Welcoming</h4>
-                  <p className="text-xs text-gray-400">Famously friendly customer service and immaculate dining rooms that families love.</p>
-                </div>
-                <img 
-                  src="https://lh3.googleusercontent.com/grass-cs/AABkmLdi1Hg8PVDFQq7hqPYbHnKTPySzqRHmZ3v3HfBoWSlp--QE3nm4_mX_wx6L4JKwUqiRn3ymnUjbaljO19OuLtzIQ7teY880rC005Ksgwc7AAlUI8TPfFajeYTXcKgKcGc3YOpnz6KVmswIK=s4800-w1000-h800" 
-                  alt="Seafood Feast Edison" 
-                  className="rounded-2xl object-cover h-64 w-full border border-[#2A2E39] shadow-lg"
-                />
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* INTERACTIVE 'BUILD YOUR SEAFOOD BOIL' SECTION */}
-      <section id="builder" className="py-20 bg-[#0D0F12] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#2A2E39_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-              Interactive Feast Customizer
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Build Your Custom Seafood Boil
+          <div className="text-center space-y-4 mb-16">
+            <span className="text-[#FFA000] text-xs font-bold uppercase tracking-widest bg-[#FFA000]/10 px-3 py-1 rounded-full">
+              Visual Feast
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Cap&rsquo;t Loui Edison Moments
             </h2>
-            <p className="text-gray-300 text-base sm:text-lg">
-              Pick your favorite catches, choose our signature house sauce, and dial in your ideal spice level before ordering!
+            <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+              From fresh ingredients to steaming garlic butter buckets enjoyed by local families.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Left: Interactive Controls */}
-            <div className="lg:col-span-7 space-y-8 bg-[#171A1F] p-6 sm:p-8 rounded-3xl border border-[#2A2E39] shadow-xl">
-              
-              {/* Step 1: Catches */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-full bg-[#D32F2F] text-white flex items-center justify-center text-xs">1</span>
-                    <span>Select Your Catches (Multiple Select)</span>
-                  </h3>
-                  <span className="text-xs text-gray-400">Fresh Daily</span>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {catchesList.map((item) => {
-                    const isSelected = selectedCatch.includes(item.name);
-                    return (
-                      <button
-                        key={item.name}
-                        onClick={() => toggleCatchItem(item.name)}
-                        className={`p-3.5 rounded-2xl border text-left flex items-center justify-between transition-all ${
-                          isSelected 
-                            ? 'bg-[#D32F2F]/15 border-[#D32F2F] text-white shadow-md' 
-                            : 'bg-[#12151B] border-[#2A2E39] text-gray-300 hover:border-gray-600'
-                        }`}
-                      >
-                        <div>
-                          <span className="font-semibold text-sm block">{item.name}</span>
-                          <span className="text-xs text-gray-400">{item.price}</span>
-                        </div>
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center border ${
-                          isSelected ? 'bg-[#D32F2F] border-[#D32F2F] text-white' : 'border-gray-600'
-                        }`}>
-                          {isSelected && <CheckCircle2 className="w-3.5 h-3.5" />}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Step 2: Signature Sauce */}
-              <div className="pt-6 border-t border-[#2A2E39]">
-                <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
-                  <span className="w-7 h-7 rounded-full bg-[#D32F2F] text-white flex items-center justify-center text-xs">2</span>
-                  <span>Choose Your Sauce Blend</span>
-                </h3>
-                <div className="space-y-3">
-                  {saucesList.map((sauce) => {
-                    const isSelected = selectedSauce === sauce.name;
-                    return (
-                      <button
-                        key={sauce.name}
-                        onClick={() => setSelectedSauce(sauce.name)}
-                        className={`w-full p-4 rounded-2xl border text-left transition-all ${
-                          isSelected 
-                            ? 'bg-[#F59E0B]/10 border-[#F59E0B] text-white shadow-md' 
-                            : 'bg-[#12151B] border-[#2A2E39] text-gray-300 hover:border-gray-600'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-bold text-sm">{sauce.name}</span>
-                          {isSelected && <span className="text-xs bg-[#F59E0B] text-black font-extrabold px-2 py-0.5 rounded-full">Selected</span>}
-                        </div>
-                        <p className="text-xs text-gray-400">{sauce.desc}</p>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Step 3: Spice Heat Index */}
-              <div className="pt-6 border-t border-[#2A2E39]">
-                <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
-                  <span className="w-7 h-7 rounded-full bg-[#D32F2F] text-white flex items-center justify-center text-xs">3</span>
-                  <span>Select Spice Heat Index</span>
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {spiceLevels.map((spice) => {
-                    const isSelected = selectedSpice.startsWith(spice.level);
-                    return (
-                      <button
-                        key={spice.level}
-                        onClick={() => setSelectedSpice(`${spice.level} (${spice.desc})`)}
-                        className={`p-3 rounded-2xl border text-center transition-all flex flex-col items-center justify-center ${
-                          isSelected 
-                            ? 'bg-red-600/20 border-red-500 text-white shadow-md' 
-                            : 'bg-[#12151B] border-[#2A2E39] text-gray-300 hover:border-gray-600'
-                        }`}
-                      >
-                        <Flame className={`w-5 h-5 mb-1.5 ${isSelected ? 'text-red-500 animate-pulse' : 'text-gray-500'}`} />
-                        <span className="font-bold text-xs">{spice.level}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right: Live Summary Card */}
-            <div className="lg:col-span-5 sticky top-28">
-              <div className="bg-gradient-to-br from-[#171A1F] to-[#12151B] p-6 sm:p-8 rounded-3xl border-2 border-[#F59E0B]/40 shadow-2xl space-y-6">
-                
-                <div className="flex items-center justify-between border-b border-[#2A2E39] pb-4">
-                  <div>
-                    <span className="text-xs text-[#F59E0B] font-bold uppercase tracking-wider">Your Custom Boil</span>
-                    <h3 className="text-xl font-extrabold text-white">Cap&rsquo;t Loui Feast Summary</h3>
-                  </div>
-                  <div className="bg-[#F59E0B] text-black font-extrabold px-3 py-1 rounded-full text-xs">
-                    Ready to Order
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-sm">
-                  <div>
-                    <span className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Selected Catches ({selectedCatch.length}):</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {selectedCatch.map(c => (
-                        <span key={c} className="bg-[#12151B] text-white border border-[#2A2E39] px-2.5 py-1 rounded-lg text-xs font-semibold">
-                          🦐 {c}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Selected Sauce:</span>
-                    <span className="bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 px-3 py-1.5 rounded-lg text-xs font-bold block">
-                      ✨ {selectedSauce}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Spice Level:</span>
-                    <span className="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1.5 rounded-lg text-xs font-bold block">
-                      🌶️ {selectedSpice}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[#2A2E39] space-y-3">
-                  <div className="flex items-center justify-between text-xs text-gray-400">
-                    <span>Includes corn, potato & sausage side</span>
-                    <span className="text-emerald-400 font-semibold">Free Side Included</span>
-                  </div>
-
-                  <a 
-                    href="tel:7323398019" 
-                    className="w-full bg-[#D32F2F] hover:bg-[#b91c1c] text-white py-4 rounded-xl font-extrabold text-sm shadow-lg shadow-[#D32F2F]/30 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
-                  >
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>Order This Combo Now • (732) 339-8019</span>
-                  </a>
-
-                  <p className="text-[11px] text-center text-gray-400">
-                    Call ahead for rapid pickup or walk right in at 1779 NJ-27, Edison, NJ!
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* SIGNATURE MENU & SAUCES SECTION */}
-      <section id="menu" className="py-20 bg-[#12151B] border-t border-[#171A1F]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 bg-[#D32F2F]/10 text-[#D32F2F] border border-[#D32F2F]/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-              Menu Highlights
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Signature Sauces & Favorites
-            </h2>
-            <p className="text-gray-300 text-base sm:text-lg">
-              Explore what Central Jersey is raving about. From mouthwatering snow crabs to crispy Cajun fries and po&rsquo; boys.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="bg-[#171A1F] p-6 rounded-3xl border border-[#2A2E39] flex flex-col justify-between hover:border-[#F59E0B]/50 transition-all">
-              <div>
-                <div className="bg-[#D32F2F]/10 text-[#D32F2F] text-xs font-bold px-2.5 py-1 rounded-md inline-block mb-3">BESTSELLER</div>
-                <h3 className="text-xl font-bold text-white mb-2">Snow Crab Boil Combo</h3>
-                <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Fresh snow crab legs served with corn, potato, and soaked generously in our signature garlic butter Cajun sauce.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <span className="text-[#F59E0B] font-extrabold text-lg">Market Price</span>
-                <span className="text-xs text-gray-400">Hands-on Feast</span>
-              </div>
-            </div>
-
-            <div className="bg-[#171A1F] p-6 rounded-3xl border border-[#2A2E39] flex flex-col justify-between hover:border-[#F59E0B]/50 transition-all">
-              <div>
-                <div className="bg-[#F59E0B]/10 text-[#F59E0B] text-xs font-bold px-2.5 py-1 rounded-md inline-block mb-3">GUEST FAVORITE</div>
-                <h3 className="text-xl font-bold text-white mb-2">Crispy Fish Po&rsquo; Boy</h3>
-                <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Golden fried fish fillet served on toasted French bread with lettuce, tomato, and house special remoulade sauce.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <span className="text-[#F59E0B] font-extrabold text-lg">$14.99</span>
-                <span className="text-xs text-gray-400">Crispy & Fresh</span>
-              </div>
-            </div>
-
-            <div className="bg-[#171A1F] p-6 rounded-3xl border border-[#2A2E39] flex flex-col justify-between hover:border-[#F59E0B]/50 transition-all">
-              <div>
-                <div className="bg-[#D32F2F]/10 text-[#D32F2F] text-xs font-bold px-2.5 py-1 rounded-md inline-block mb-3">MUST TRY</div>
-                <h3 className="text-xl font-bold text-white mb-2">Authentic Cajun Fries</h3>
-                <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Crispy seasoned French fries dusted with authentic Cajun spices. Praised by locals as the best seasoned fries around.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <span className="text-[#F59E0B] font-extrabold text-lg">$6.99</span>
-                <span className="text-xs text-gray-400">Spicy & Crispy</span>
-              </div>
-            </div>
-
-            <div className="bg-[#171A1F] p-6 rounded-3xl border border-[#2A2E39] flex flex-col justify-between hover:border-[#F59E0B]/50 transition-all">
-              <div>
-                <div className="bg-[#F59E0B]/10 text-[#F59E0B] text-xs font-bold px-2.5 py-1 rounded-md inline-block mb-3">LOADED COMBO</div>
-                <h3 className="text-xl font-bold text-white mb-2">Custom 2lb Seafood Combo</h3>
-                <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Choose your catches (Shrimp, Mussels, Scallops, Crab) paired with free sausage, corn, and potatoes in Cap&rsquo;t Loui blend.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <span className="text-[#F59E0B] font-extrabold text-lg">$38.99+</span>
-                <span className="text-xs text-gray-400">Ultimate Feast</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* REAL PHOTO SHOWCASE */}
-      <section id="gallery" className="py-20 bg-[#0D0F12]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-              Hands-On Feast Gallery
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Real Guest Experiences in Edison
-            </h2>
-            <p className="text-gray-300 text-base sm:text-lg">
-              Gloves on, bibs tied, and sauces flying. Take a peek inside Cap&rsquo;t Loui Edison.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="rounded-3xl overflow-hidden border border-[#2A2E39] bg-[#171A1F] group relative h-72">
-              <img 
-                src="https://lh3.googleusercontent.com/grass-cs/AABkmLf3_lnbDP8OySa0WgBo63_L68CH-WULNHJIqDgF3V7kegHR21lWd-OH16Nlwjme9qB4LRmeoKakytGjzkmxmTW27-GKgQdrLOzsGmNahy3lzRf5fv_oomXoF1fjzdre9sVPY3l4cyz20tY=s4800-w1000-h800" 
-                alt="Cap't Loui Edison Feast" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="relative rounded-2xl overflow-hidden h-64 border border-gray-800 group">
+              <img
+                src="https://lh3.googleusercontent.com/grass-cs/AABkmLcvxI39BFZYoHzxRzrYjJkwRQFQLcAJpTsFo7MfbWxEOYInt0v0iSrLrIUyGqwTq7i8NJ3GoL76J0wrmtnegbCJJGuRWTojQ4z5CXbHX--lQ3vFzzySFHifIMh0Ie1f6QN2XRhSyI6OnSum=s4800-w1000-h800"
+                alt="Cap't Loui Edison Spread"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <span className="text-xs font-bold text-white bg-[#D32F2F] px-3 py-1 rounded-full">Cap&rsquo;t Loui - Edison, NJ</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span className="text-xs font-semibold text-white">Signature Garlic Butter Boil</span>
               </div>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-[#2A2E39] bg-[#171A1F] group relative h-72">
-              <img 
-                src="https://lh3.googleusercontent.com/grass-cs/AABkmLcvxI39BFZYoHzxRzrYjJkwRQFQLcAJpTsFo7MfbWxEOYInt0v0iSrLrIUyGqwTq7i8NJ3GoL76J0wrmtnegbCJJGuRWTojQ4z5CXbHX--lQ3vFzzySFHifIMh0Ie1f6QN2XRhSyI6OnSum=s4800-w1000-h800" 
-                alt="Cap't Loui Edison Atmosphere" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            <div className="relative rounded-2xl overflow-hidden h-64 border border-gray-800 group">
+              <img
+                src="https://lh3.googleusercontent.com/grass-cs/AABkmLdi1Hg8PVDFQq7hqPYbHnKTPySzqRHmZ3v3HfBoWSlp--QE3nm4_mX_wx6L4JKwUqiRn3ymnUjbaljO19OuLtzIQ7teY880rC005Ksgwc7AAlUI8TPfFajeYTXcKgKcGc3YOpnz6KVmswIK=s4800-w1000-h800"
+                alt="Xiaotong Sun Photo"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <span className="text-xs font-bold text-white bg-[#D32F2F] px-3 py-1 rounded-full">Vibrant Dining Room</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span className="text-xs font-semibold text-white">Fresh Crab &amp; Shrimp Combo</span>
               </div>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-[#2A2E39] bg-[#171A1F] group relative h-72">
-              <img 
-                src="https://lh3.googleusercontent.com/grass-cs/AABkmLdi1Hg8PVDFQq7hqPYbHnKTPySzqRHmZ3v3HfBoWSlp--QE3nm4_mX_wx6L4JKwUqiRn3ymnUjbaljO19OuLtzIQ7teY880rC005Ksgwc7AAlUI8TPfFajeYTXcKgKcGc3YOpnz6KVmswIK=s4800-w1000-h800" 
-                alt="Xiaotong Sun Review Photo" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            <div className="relative rounded-2xl overflow-hidden h-64 border border-gray-800 group">
+              <img
+                src="https://lh3.googleusercontent.com/grass-cs/AABkmLdmkexVeTtTQif6_5o0P4gKtbtJeyMUOMpDshvXzHeM_zNDyQBomvanaf7uAvxju4OLK1IqtxI8WRu7cTe2ujuTXvSDnf15CBPakWUPvdS-AGNKc4x0VBygjNtD7QhcDLniu9yZug6Z4gnl=s4800-w1000-h800"
+                alt="Dennis Lubrin Photo"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <span className="text-xs font-bold text-white bg-[#D32F2F] px-3 py-1 rounded-full">Photo by Xiaotong Sun</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span className="text-xs font-semibold text-white">Golden Cajun Baskets</span>
               </div>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-[#2A2E39] bg-[#171A1F] group relative h-72">
-              <img 
-                src="https://lh3.googleusercontent.com/grass-cs/AABkmLdmkexVeTtTQif6_5o0P4gKtbtJeyMUOMpDshvXzHeM_zNDyQBomvanaf7uAvxju4OLK1IqtxI8WRu7cTe2ujuTXvSDnf15CBPakWUPvdS-AGNKc4x0VBygjNtD7QhcDLniu9yZug6Z4gnl=s4800-w1000-h800" 
-                alt="Dennis Lubrin Review Photo" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            <div className="relative rounded-2xl overflow-hidden h-64 border border-gray-800 group">
+              <img
+                src="https://captloui.com/images/menu/ingredients-1.webp"
+                alt="Quality Ingredients"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <span className="text-xs font-bold text-white bg-[#D32F2F] px-3 py-1 rounded-full">Photo by Dennis Lubrin</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span className="text-xs font-semibold text-white">Fresh Daily Sourcing</span>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
       {/* VERIFIED REVIEWS SECTION */}
-      <section id="reviews" className="py-20 bg-[#12151B] border-t border-[#171A1F]">
+      <section id="reviews" className="py-24 bg-[#161920] border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-              Wall of Praise • 1,900+ 4.9★ Reviews
+          <div className="text-center space-y-4 mb-16">
+            <div className="inline-flex items-center gap-2 bg-[#FFA000]/10 border border-[#FFA000]/30 px-4 py-1.5 rounded-full text-[#FFA000] text-xs font-bold">
+              <Star className="w-4 h-4 fill-[#FFA000]" /> 4.9 ★ Verified Google Reviews
             </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Loved by Central Jersey Foodies
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Loved by Edison &amp; Central Jersey
             </h2>
-            <p className="text-gray-300 text-base sm:text-lg">
-              Here is what real guests are saying about their seafood boils and hospitality at our Edison location.
+            <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+              Read what nearly 2,000 happy guests have to say about our hospitality, portions, and signature sauces.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            
-            {/* Review 1 */}
-            <div className="bg-[#171A1F] p-8 rounded-3xl border border-[#2A2E39] shadow-xl space-y-4 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex text-[#F59E0B]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#F59E0B]" />
-                    ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {reviews.map((rev, idx) => (
+              <div
+                key={idx}
+                className="bg-[#0C0E12] border border-gray-800 rounded-3xl p-8 shadow-xl flex flex-col justify-between space-y-6 relative"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-[#FFA000]">
+                      {[...Array(rev.rating)].map((_, rIdx) => (
+                        <Star key={rIdx} className="w-4 h-4 fill-[#FFA000]" />
+                      ))}
+                    </div>
+                    <span className="text-xs text-gray-500">{rev.relativeTime}</span>
                   </div>
-                  <span className="text-xs text-gray-400">2 weeks ago</span>
+                  <p className="text-gray-300 text-sm sm:text-base italic leading-relaxed">
+                    &ldquo;{rev.text}&rdquo;
+                  </p>
                 </div>
-                <p className="text-gray-200 text-sm sm:text-base italic leading-relaxed">
-                  &ldquo;We been to many seafood boil places and this place is the best!!! The seasoning is perfect and not too salty and the staff was SO nice!!! Like I&rsquo;ve never experienced such nice customer service in NJ! They were so accommodating to our toddler and were just amazing.&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-white text-sm">Allison A.</h4>
-                  <span className="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Verified Google Reviewer
-                  </span>
-                </div>
-                <span className="bg-[#D32F2F]/10 text-[#D32F2F] text-xs font-bold px-2.5 py-1 rounded-md">5.0 ★</span>
-              </div>
-            </div>
 
-            {/* Review 2 */}
-            <div className="bg-[#171A1F] p-8 rounded-3xl border border-[#2A2E39] shadow-xl space-y-4 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex text-[#F59E0B]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#F59E0B]" />
-                    ))}
+                <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C62828] to-[#FFA000] flex items-center justify-center font-bold text-white text-sm">
+                      {rev.author.charAt(0)}
+                    </div>
+                    <div>
+                      <span className="text-sm font-bold text-white block">{rev.author}</span>
+                      <span className="text-xs text-emerald-400 flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> Verified Google Reviewer
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-xs text-gray-400">2 months ago</span>
                 </div>
-                <p className="text-gray-200 text-sm sm:text-base italic leading-relaxed">
-                  &ldquo;Omgggg this seafood boil was sooo good 😭 everything was hot fresh and full of flavor. They definitely not stingy with the portions either. The crab legs lobster shrimp corn potatoes literally everything was soaking in that sauceeee 🤪 gloves went on and being c...&rdquo;
-                </p>
               </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-white text-sm">Trisha T.</h4>
-                  <span className="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Verified Google Reviewer
-                  </span>
-                </div>
-                <span className="bg-[#D32F2F]/10 text-[#D32F2F] text-xs font-bold px-2.5 py-1 rounded-md">5.0 ★</span>
-              </div>
-            </div>
-
-            {/* Review 3 */}
-            <div className="bg-[#171A1F] p-8 rounded-3xl border border-[#2A2E39] shadow-xl space-y-4 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex text-[#F59E0B]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#F59E0B]" />
-                    ))}
-                  </div>
-                  <span className="text-xs text-gray-400">4 months ago</span>
-                </div>
-                <p className="text-gray-200 text-sm sm:text-base italic leading-relaxed">
-                  &ldquo;Our experience at Cap&rsquo;t Louie in Edison was spectacular and I find one of the best seafood boil places in central Jersey. My wife and I ordered the custom 2lb combo with snow crab legs, head on shrimp, and scallops with the free side of sausage all in the Cap&rsquo;t...&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-white text-sm">Juni S.</h4>
-                  <span className="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Verified Google Reviewer
-                  </span>
-                </div>
-                <span className="bg-[#D32F2F]/10 text-[#D32F2F] text-xs font-bold px-2.5 py-1 rounded-md">5.0 ★</span>
-              </div>
-            </div>
-
-            {/* Review 4 */}
-            <div className="bg-[#171A1F] p-8 rounded-3xl border border-[#2A2E39] shadow-xl space-y-4 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex text-[#F59E0B]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#F59E0B]" />
-                    ))}
-                  </div>
-                  <span className="text-xs text-gray-400">a month ago</span>
-                </div>
-                <p className="text-gray-200 text-sm sm:text-base italic leading-relaxed">
-                  &ldquo;I can no longer eat shellfish, so I had a fish po boy and it was so good. The sauce was amazing. The Cajun fries are the first I had that actually taste like true Cajun. This place was so clean and the staff are very pleasant. I will definitely be returning. M...&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-[#2A2E39] flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-white text-sm">Nekia Williams</h4>
-                  <span className="text-xs text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Verified Google Reviewer
-                  </span>
-                </div>
-                <span className="bg-[#D32F2F]/10 text-[#D32F2F] text-xs font-bold px-2.5 py-1 rounded-md">5.0 ★</span>
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
 
-      {/* HOURS & NEIGHBORHOOD MAP SECTION */}
-      <section id="contact" className="py-20 bg-[#0D0F12] border-t border-[#171A1F]">
+      {/* LOCATION, HOURS & CONTACT SECTION */}
+      <section id="contact" className="py-24 bg-[#0C0E12] border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                Visit Cap&rsquo;t Loui Edison
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* LEFT: HOURS & INFO */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <span className="text-[#FFA000] text-xs font-bold uppercase tracking-widest bg-[#FFA000]/10 px-3 py-1 rounded-full">
+                  Visit Us
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                  Cap&rsquo;t Loui - Edison, NJ
+                </h2>
+                <p className="text-gray-400 text-sm">
+                  Conveniently located on Route 27 in Edison. Stop by for lunch or dinner, or order ahead for pickup and delivery.
+                </p>
               </div>
-              
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Conveniently Located on Route 27 with Ample Parking
-              </h2>
 
-              <p className="text-gray-300 text-base leading-relaxed">
-                Whether you&rsquo;re craving a quick lunch or planning a weekend family seafood feast, we are right around the corner in Edison, NJ. Walk-ins are always welcome!
-              </p>
-
-              <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-4 bg-[#171A1F] p-4 rounded-2xl border border-[#2A2E39]">
-                  <MapPin className="w-6 h-6 text-[#F59E0B] shrink-0 mt-1" />
+              <div className="bg-[#161920] border border-gray-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-6 h-6 text-[#FFA000] shrink-0 mt-1" />
                   <div>
-                    <h4 className="text-white font-bold text-sm">Address</h4>
-                    <p className="text-xs text-gray-300 mt-0.5">1779 NJ-27, Edison, NJ 08817, USA</p>
+                    <span className="text-xs text-gray-400 block font-medium">Address</span>
+                    <span className="text-base font-bold text-white">1779 NJ-27, Edison, NJ 08817, USA</span>
+                    <a
+                      href="https://maps.google.com/?q=1779+NJ-27,+Edison,+NJ+08817"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-[#FFA000] hover:underline font-semibold block mt-1 flex items-center gap-1"
+                    >
+                      Open in Google Maps <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 bg-[#171A1F] p-4 rounded-2xl border border-[#2A2E39]">
-                  <Phone className="w-6 h-6 text-[#D32F2F] shrink-0 mt-1" />
+                <div className="flex items-start gap-4">
+                  <Phone className="w-6 h-6 text-[#FFA000] shrink-0 mt-1" />
                   <div>
-                    <h4 className="text-white font-bold text-sm">Direct Phone</h4>
-                    <a href="tel:7323398019" className="text-xs text-[#F59E0B] font-bold hover:underline mt-0.5 block">
+                    <span className="text-xs text-gray-400 block font-medium">Phone Number</span>
+                    <a href="tel:7323398019" className="text-base font-bold text-white hover:text-[#FFA000]">
                       (732) 339-8019
                     </a>
                   </div>
                 </div>
-              </div>
 
-              <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="https://maps.google.com/?q=1779+NJ-27+Edison+NJ+08817" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-[#D32F2F] hover:bg-[#b91c1c] text-white px-6 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-[#D32F2F]/20 flex items-center justify-center gap-2 transition-all"
-                >
-                  <MapPin className="w-4 h-4" />
-                  <span>Open in Google Maps</span>
-                  <ExternalLink className="w-3.5 h-3.5 ml-1" />
-                </a>
-                <a 
-                  href="tel:7323398019" 
-                  className="bg-[#171A1F] hover:bg-[#20242D] text-gray-200 border border-[#2A2E39] px-6 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all"
-                >
-                  <Phone className="w-4 h-4 text-[#F59E0B]" />
-                  <span>Call (732) 339-8019</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Operating Hours Card */}
-            <div className="lg:col-span-6 bg-[#171A1F] p-8 rounded-3xl border border-[#2A2E39] shadow-xl">
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#2A2E39]">
-                <div className="flex items-center gap-2.5">
-                  <Clock className="w-5 h-5 text-[#F59E0B]" />
-                  <h3 className="text-lg font-bold text-white">Operating Hours</h3>
+                <div className="flex items-start gap-4">
+                  <Clock className="w-6 h-6 text-[#FFA000] shrink-0 mt-1" />
+                  <div className="space-y-1">
+                    <span className="text-xs text-gray-400 block font-medium mb-1">Operating Hours</span>
+                    {schedule.map((item, idx) => (
+                      <div key={idx} className="text-xs text-gray-300 flex justify-between gap-4">
+                        <span>{item.split(":")[0]}</span>
+                        <span className="font-semibold text-white">{item.split(":")[1]}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Open Today
-                </span>
               </div>
 
-              <div className="space-y-3 text-sm">
-                {[
-                  "Monday: 11:30 AM – 10:00 PM",
-                  "Tuesday: 11:30 AM – 10:00 PM",
-                  "Wednesday: 11:30 AM – 10:00 PM",
-                  "Thursday: 11:30 AM – 10:00 PM",
-                  "Friday: 11:30 AM – 11:00 PM",
-                  "Saturday: 11:30 AM – 11:00 PM",
-                  "Sunday: 11:30 AM – 10:00 PM"
-                ].map((sched, idx) => {
-                  const [day, time] = sched.split(": ");
-                  return (
-                    <div key={idx} className="flex items-center justify-between py-1.5 border-b border-[#2A2E39]/40 last:border-none">
-                      <span className="text-gray-300 font-medium">{day}</span>
-                      <span className="text-[#F59E0B] font-semibold">{time}</span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-[#2A2E39] text-center">
-                <span className="text-xs text-gray-400">
-                  ✨ Holiday hours may vary. Call ahead to confirm table availability.
-                </span>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#C62828] hover:bg-[#a51d1d] text-white px-6 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-[#C62828]/30 transition-all flex items-center gap-2"
+                >
+                  <ShoppingBag className="w-4 h-4" /> Order Delivery
+                </a>
+                <a
+                  href="https://www.opentable.com/r/capt-loui-edison-reservations-edison?restref=1484617&lang=en-US&ot_source=Restaurant%20website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#161920] hover:bg-gray-800 text-white border border-gray-700 hover:border-[#FFA000] px-6 py-3.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2"
+                >
+                  <Calendar className="w-4 h-4 text-[#FFA000]" /> Reserve Table
+                </a>
               </div>
             </div>
 
+            {/* RIGHT: EMBEDDED MAP OR LOCATION VISUAL */}
+            <div className="bg-[#161920] border border-gray-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col min-h-[450px]">
+              <div className="relative flex-1 bg-black">
+                <iframe
+                  title="Cap't Loui Edison Map"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.429402129584!2d-74.3853!3d40.5284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3b7b3b3b3b3b3%3A0x3b3b3b3b3b3b3b3b!2s1779+NJ-27%2C+Edison%2C+NJ+08817!5e0!3m2!1sen!2sus!4v1650000000000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: "450px" }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#090A0D] border-t border-[#171A1F] py-12 text-gray-400 text-sm">
+      <footer className="bg-black border-t border-gray-900 py-12 text-gray-400 text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#D32F2F] flex items-center justify-center text-white font-bold">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#C62828] to-[#FFA000] flex items-center justify-center font-bold text-white text-xs">
               CL
             </div>
-            <div>
-              <span className="text-white font-bold block leading-none">Cap&rsquo;t Loui - Edison, NJ</span>
-              <span className="text-xs text-gray-500 mt-1 block">© {new Date().getFullYear()} All rights reserved.</span>
-            </div>
+            <span className="text-white font-bold tracking-tight">Cap&rsquo;t Loui - Edison, NJ</span>
           </div>
 
-          <div className="flex items-center gap-6 text-xs">
-            <a href="#about" className="hover:text-white transition-colors">Our Story</a>
-            <a href="#builder" className="hover:text-white transition-colors">Build A Boil</a>
-            <a href="#menu" className="hover:text-white transition-colors">Menu</a>
-            <a href="#reviews" className="hover:text-white transition-colors">Reviews (4.9★)</a>
-          </div>
+          <p className="text-xs text-gray-500 text-center md:text-left">
+            © {new Date().getFullYear()} Cap&rsquo;t Loui Edison. All rights reserved. Crafted with high-energy Cajun warmth.
+          </p>
 
-          <div className="text-xs text-gray-500">
-            Concept Prototype crafted by Apex Digital
+          <div className="flex items-center gap-6 text-xs font-semibold">
+            <a href="https://captloui.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFA000]">
+              Official Brand Site
+            </a>
+            <a href="#about" className="hover:text-[#FFA000]">
+              Our Story
+            </a>
+            <a href="#menu" className="hover:text-[#FFA000]">
+              Menu
+            </a>
           </div>
         </div>
       </footer>
 
       {/* STICKY MOBILE BOTTOM DOCK */}
-      <div className="fixed bottom-0 inset-x-0 bg-[#171A1F]/95 backdrop-blur-md border-t border-[#2A2E39] p-3 sm:hidden z-40 flex items-center gap-3">
-        <a 
-          href="tel:7323398019" 
-          className="flex-1 bg-[#D32F2F] text-white py-3 rounded-xl font-extrabold text-xs flex items-center justify-center gap-2 shadow-md"
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#161920]/95 backdrop-blur-md border-t border-gray-800 p-3 flex items-center gap-3 shadow-2xl">
+        <a
+          href="tel:7323398019"
+          className="flex-1 bg-black/60 border border-gray-700 hover:border-[#FFA000] text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors"
         >
-          <Phone className="w-4 h-4" />
-          <span>Call (732) 339-8019</span>
+          <Phone className="w-4 h-4 text-[#FFA000]" /> Call (732) 339-8019
         </a>
-        <a 
-          href="#builder" 
-          className="flex-1 bg-[#F59E0B] text-black py-3 rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-md"
+        <a
+          href="https://www.ubereats.com/store/capt-loui-edison-1779-new-jersey-27/DmvMlDRwUhGBi3y7wWB-iA"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 bg-[#C62828] hover:bg-[#a51d1d] text-white py-3 rounded-xl font-bold text-xs shadow-lg shadow-[#C62828]/30 flex items-center justify-center gap-2 transition-colors"
         >
-          <Flame className="w-4 h-4" />
-          <span>Build Boil</span>
+          <ShoppingBag className="w-4 h-4" /> Order Online
         </a>
       </div>
-
-      {/* COMPARE BEFORE VS. AFTER MODAL */}
-      {compareModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#171A1F] border border-[#2A2E39] w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-            
-            {/* Modal Header */}
-            <div className="p-6 border-b border-[#2A2E39] flex items-center justify-between">
-              <div>
-                <span className="bg-[#D32F2F] text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Audit & Redesign Breakdown</span>
-                <h3 className="text-xl font-extrabold text-white mt-1">Cap&rsquo;t Loui Edison — Before vs. After Uplift</h3>
-              </div>
-              <button 
-                onClick={() => setCompareModalOpen(false)}
-                className="p-2 rounded-xl bg-[#0D0F12] text-gray-400 hover:text-white border border-[#2A2E39]"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-8">
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                
-                {/* Old Site Critique */}
-                <div className="space-y-4 bg-[#0D0F12] p-6 rounded-2xl border border-red-500/30">
-                  <div className="flex items-center justify-between">
-                    <span className="text-red-400 font-bold text-sm uppercase tracking-wider">Current Old Site</span>
-                    <span className="bg-red-500/10 text-red-400 text-xs px-2 py-0.5 rounded font-bold">Friction Points</span>
-                  </div>
-                  
-                  <div className="rounded-xl overflow-hidden border border-gray-800">
-                    <img 
-                      src="https://iad.microlink.io/zEFjafiaicBUQI1xwFg4c2oJEZfrlVRWKIPwlAORfWWWPlA4oTCEJ3IeBgs3IL5UhW0W_QThKr-qbLT4Rs6cCQ.png" 
-                      alt="Old Site Screenshot" 
-                      className="w-full h-48 object-cover opacity-80"
-                    />
-                  </div>
-
-                  <ul className="space-y-2 text-xs text-gray-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-red-400 font-bold">✕</span>
-                      <span>Heavy dark photo overlays obscure text, making tap targets difficult on mobile.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-red-400 font-bold">✕</span>
-                      <span>Custom boil combinations cannot be visualized on-page, forcing users to third-party menus.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-red-400 font-bold">✕</span>
-                      <span>Lacks prominence for their stellar 4.9-star Google rating across 1,900+ reviews.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* New Redesign */}
-                <div className="space-y-4 bg-[#0D0F12] p-6 rounded-2xl border border-emerald-500/30">
-                  <div className="flex items-center justify-between">
-                    <span className="text-emerald-400 font-bold text-sm uppercase tracking-wider">New Apex Redesign</span>
-                    <span className="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-0.5 rounded font-bold">High Converting</span>
-                  </div>
-
-                  <div className="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#171A1F] h-48 flex items-center justify-center p-4 text-center">
-                    <div>
-                      <Sparkles className="w-8 h-8 text-[#F59E0B] mx-auto mb-2 animate-bounce" />
-                      <span className="text-sm font-bold text-white block">Interactive Boil Builder & Mobile Optimized</span>
-                      <span className="text-xs text-gray-400 mt-1 block">Instant catch selection, sauce preview, & direct calling</span>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2 text-xs text-gray-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Interactive &ldquo;Build Your Boil&rdquo; widget lets guests customize catches and sauces instantly.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Prominent 4.9-star Google review showcase with verified customer quotes.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span>Mobile-first sticky bottom dock for rapid calling and ordering access.</span>
-                    </li>
-                  </ul>
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* Modal Footer */}
-            <div className="p-6 border-t border-[#2A2E39] bg-[#12151B] flex items-center justify-between">
-              <span className="text-xs text-gray-400">Ready to upgrade Cap&rsquo;t Loui Edison&rsquo;s digital storefront?</span>
-              <button 
-                onClick={() => setCompareModalOpen(false)}
-                className="bg-[#D32F2F] hover:bg-[#b91c1c] text-white px-6 py-2 rounded-xl font-bold text-xs shadow-md"
-              >
-                Close Preview
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }
