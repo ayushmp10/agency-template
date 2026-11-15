@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keeps the dev badge out of the review screenshots.
+  devIndicators: false,
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**" },
